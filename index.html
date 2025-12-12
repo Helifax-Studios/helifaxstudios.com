@@ -10,7 +10,6 @@
     :root{
       --bg1:#ffe6f3;
       --bg2:#efe6ff;
-      --card:#ffffffcc;
       --ink:#2b1f33;
       --muted:#5d4a68;
       --line:#ffffff88;
@@ -56,14 +55,25 @@
       align-items:center;
     }
 
+    /* PROFILE IMAGE */
     .pfp{
-      width:88px;height:88px;border-radius:26px;
-      background:
-        radial-gradient(circle at 30% 30%, #fff, transparent 45%),
-        linear-gradient(135deg, var(--pink), var(--lav), var(--blue));
-      box-shadow: 0 14px 32px rgba(255, 183, 214, .35);
-      border: 1px solid rgba(255,255,255,.8);
-      flex: 0 0 auto;
+      width:88px;
+      height:88px;
+      border-radius:26px;
+      overflow:hidden;
+      flex:0 0 auto;
+      border: 1px solid rgba(255,255,255,.9);
+      box-shadow:
+        0 14px 32px rgba(255,183,214,.35),
+        0 0 0 4px rgba(255,255,255,.4);
+      background: linear-gradient(135deg, var(--pink), var(--lav), var(--blue));
+    }
+
+    .pfp img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
     }
 
     h1{margin:0;font-size:32px;letter-spacing:.2px}
@@ -172,7 +182,9 @@
 
       <!-- HEADER -->
       <section class="top">
-        <div class="pfp"></div>
+        <div class="pfp">
+          <img src="VRChat_2025-12-11_00-07-17.525_1920x1080_cropped.png" alt="Cyra Helifax avatar">
+        </div>
         <div>
           <h1>Cyra Helifax ✨🤍</h1>
           <p class="subtitle">cyrahelifax • any (pref. she/her) 🐰&lt;3</p>
@@ -267,10 +279,10 @@
 
     tabs.forEach(tab => {
       tab.addEventListener('click', () => {
-        tabs.forEach(t => t.setAttribute('aria-selected', 'false'));
+        tabs.forEach(t => t.setAttribute('aria-selected','false'));
         panels.forEach(p => p.classList.remove('active'));
 
-        tab.setAttribute('aria-selected', 'true');
+        tab.setAttribute('aria-selected','true');
         document.getElementById(tab.getAttribute('aria-controls')).classList.add('active');
       });
     });
