@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>About Me</title>
-  <meta name="description" content="Cute pastel about page with interactive tabs." />
+  <title>Cyra Helifax ✨🤍</title>
+  <meta name="description" content="Cyra Helifax — author, aspiring pilot, pastel-coded creator." />
+
   <style>
     :root{
-      /* Pastel: pink-lavender base + baby-blue accents */
       --bg1:#ffe6f3;
       --bg2:#efe6ff;
       --card:#ffffffcc;
@@ -25,6 +25,7 @@
 
     *{box-sizing:border-box}
     html,body{height:100%}
+
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
@@ -38,6 +39,7 @@
     }
 
     .wrap{max-width:980px;margin:0 auto}
+
     .card{
       background: linear-gradient(180deg, rgba(255,255,255,.85), rgba(255,255,255,.65));
       border:1px solid var(--line);
@@ -84,14 +86,15 @@
       padding: 10px 14px;
       cursor:pointer;
       font-weight: 650;
-      letter-spacing:.1px;
-      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      transition: transform .12s ease, background .12s ease;
       box-shadow: 0 10px 22px rgba(40,15,60,.08);
     }
     .pill:hover{transform: translateY(-1px); background: rgba(255,255,255,.72)}
     .pill[aria-selected="true"]{
-      background: linear-gradient(135deg, rgba(255,183,214,.55), rgba(203,183,255,.55), rgba(169,220,255,.55));
-      border-color: rgba(255,255,255,.95);
+      background: linear-gradient(135deg,
+        rgba(255,183,214,.55),
+        rgba(203,183,255,.55),
+        rgba(169,220,255,.55));
     }
 
     .panelWrap{
@@ -133,10 +136,6 @@
     .miniTitle{margin:0 0 6px;font-weight:750}
     .miniText{margin:0;color:rgba(93,74,104,.95);line-height:1.45}
 
-    a{
-      color: inherit;
-      text-decoration: none;
-    }
     .linkList{list-style:none;margin:0;padding:0;display:grid;gap:10px}
     .link{
       display:flex;align-items:center;justify-content:space-between;
@@ -145,127 +144,138 @@
       border:1px solid rgba(255,255,255,.78);
       background: rgba(255,255,255,.65);
       transition: transform .12s ease, background .12s ease;
+      text-decoration:none;
+      color:inherit;
     }
     .link:hover{transform: translateY(-1px); background: rgba(255,255,255,.8)}
+
     .tag{
       font-size:12px;
       padding: 6px 10px;
       border-radius: 999px;
-      border:1px solid rgba(255,255,255,.9);
-      background: linear-gradient(135deg, rgba(255,183,214,.35), rgba(169,220,255,.30));
-      color: rgba(43,31,51,.9);
+      background: linear-gradient(135deg,
+        rgba(255,183,214,.35),
+        rgba(169,220,255,.30));
     }
 
     .footer{
       padding: 14px 22px 20px;
       color: rgba(93,74,104,.85);
       font-size: 13px;
-      display:flex;
-      justify-content: space-between;
-      gap: 10px;
-      flex-wrap: wrap;
     }
-    .sparkle{opacity:.9}
   </style>
 </head>
 
 <body>
   <div class="wrap">
     <main class="card">
+
+      <!-- HEADER -->
       <section class="top">
-        <div class="pfp" aria-hidden="true"></div>
+        <div class="pfp"></div>
         <div>
-          <h1>Your Name</h1>
-          <p class="subtitle">cute pastel human ✨</p>
+          <h1>Cyra Helifax ✨🤍</h1>
+          <p class="subtitle">cyrahelifax • any (pref. she/her) 🐰&lt;3</p>
           <p class="bio">
-            A short, sweet bio goes here. Keep it 2–3 sentences so the page feels clean.
+            Author & aspiring pilot ✈️<br/>
+            Never settle for good enough.<br/>
+            Soft-hearted, star-lit, and quietly building something meaningful.
           </p>
         </div>
       </section>
 
-      <!-- “Tabs” (pill buttons) -->
-      <nav class="pills" role="tablist" aria-label="About tabs">
-        <button class="pill" role="tab" aria-selected="true" aria-controls="panel-about" id="tab-about">About</button>
-        <button class="pill" role="tab" aria-selected="false" aria-controls="panel-links" id="tab-links">Links</button>
-        <button class="pill" role="tab" aria-selected="false" aria-controls="panel-projects" id="tab-projects">Projects</button>
-        <button class="pill" role="tab" aria-selected="false" aria-controls="panel-contact" id="tab-contact">Contact</button>
+      <!-- TABS -->
+      <nav class="pills" role="tablist">
+        <button class="pill" role="tab" aria-selected="true" aria-controls="panel-about">About</button>
+        <button class="pill" role="tab" aria-selected="false" aria-controls="panel-links">Links</button>
+        <button class="pill" role="tab" aria-selected="false" aria-controls="panel-projects">Projects</button>
+        <button class="pill" role="tab" aria-selected="false" aria-controls="panel-contact">Contact</button>
       </nav>
 
-      <!-- Panels that “pull out” info -->
+      <!-- PANELS -->
       <section class="panelWrap">
-        <div class="panel active" role="tabpanel" id="panel-about" aria-labelledby="tab-about">
+
+        <div class="panel active" id="panel-about">
           <div class="grid">
             <div class="miniCard">
               <p class="miniTitle">Vibe</p>
-              <p class="miniText">Soft, cozy, pastel — simple on purpose.</p>
+              <p class="miniText">
+                fox heart, starlit soul ✧<br/>
+                soft, pastel, quietly determined
+              </p>
             </div>
             <div class="miniCard">
               <p class="miniTitle">Currently</p>
-              <p class="miniText">Put what you’re working on right now (1–2 lines).</p>
+              <p class="miniText">
+                writing stories, building creative spaces,<br/>
+                and working toward the cockpit ✈️
+              </p>
             </div>
           </div>
         </div>
 
-        <div class="panel" role="tabpanel" id="panel-links" aria-labelledby="tab-links">
+        <div class="panel" id="panel-links">
           <ul class="linkList">
-            <li><a class="link" href="#" target="_blank" rel="noreferrer"><span>Portfolio</span><span class="tag">work</span></a></li>
-            <li><a class="link" href="#" target="_blank" rel="noreferrer"><span>Instagram</span><span class="tag">social</span></a></li>
-            <li><a class="link" href="#" target="_blank" rel="noreferrer"><span>GitHub</span><span class="tag">code</span></a></li>
+            <li><a class="link" href="https://www.wattpad.com/user/CyraRemiHelifax" target="_blank"><span>Wattpad</span><span class="tag">writing</span></a></li>
+            <li><a class="link" href="https://cyrahelifax.mypixieset.com/" target="_blank"><span>Author Page</span><span class="tag">portfolio</span></a></li>
+            <li><a class="link" href="https://discord.com/users/605927149282656257" target="_blank"><span>Discord</span><span class="tag">chat</span></a></li>
+            <li><a class="link" href="https://vrchat.com/home/user/usr_d997cab5-4046-4eb5-8ac7-fbb34163f5aa" target="_blank"><span>VRChat</span><span class="tag">vr</span></a></li>
+            <li><a class="link" href="https://www.roblox.com/users/120940577/profile" target="_blank"><span>Roblox</span><span class="tag">play</span></a></li>
           </ul>
         </div>
 
-        <div class="panel" role="tabpanel" id="panel-projects" aria-labelledby="tab-projects">
+        <div class="panel" id="panel-projects">
           <div class="grid">
             <div class="miniCard">
-              <p class="miniTitle">Project 1</p>
-              <p class="miniText">Short hook + what it is.</p>
+              <p class="miniTitle">Yunari & the Stars</p>
+              <p class="miniText">
+                A soft-cosmic fantasy about memory, family, and fading starlight.
+              </p>
             </div>
             <div class="miniCard">
-              <p class="miniTitle">Project 2</p>
-              <p class="miniText">Another short hook. Keep it tiny.</p>
+              <p class="miniTitle">Helifax Studio</p>
+              <p class="miniText">
+                Pastel-coded storytelling across writing, worlds, and digital spaces.
+              </p>
             </div>
           </div>
         </div>
 
-        <div class="panel" role="tabpanel" id="panel-contact" aria-labelledby="tab-contact">
+        <div class="panel" id="panel-contact">
           <div class="miniCard">
             <p class="miniTitle">Say hi</p>
             <p class="miniText">
-              Email: <a href="mailto:you@email.com"><b>you@email.com</b></a><br/>
-              Discord: <b>yourhandle</b>
+              Discord preferred 💬<br/>
+              Open to kind conversations & creative collaboration.
             </p>
           </div>
         </div>
+
       </section>
 
+      <!-- FOOTER -->
       <footer class="footer">
-        <span class="sparkle">✿ pastel tabs site ✿</span>
-        <span>© <span id="y"></span> Your Name</span>
+        © <span id="y"></span> Helifax Studio
       </footer>
+
     </main>
   </div>
 
   <script>
-    // Simple accessible tab switching
-    const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
-    const panels = Array.from(document.querySelectorAll('[role="tabpanel"]'));
-
-    function activateTab(tab) {
-      tabs.forEach(t => t.setAttribute("aria-selected", String(t === tab)));
-      panels.forEach(p => p.classList.toggle("active", p.id === tab.getAttribute("aria-controls")));
-      tab.focus();
-    }
+    const tabs = [...document.querySelectorAll('[role="tab"]')];
+    const panels = [...document.querySelectorAll('.panel')];
 
     tabs.forEach(tab => {
-      tab.addEventListener("click", () => activateTab(tab));
-      tab.addEventListener("keydown", (e) => {
-        const i = tabs.indexOf(tab);
-        if (e.key === "ArrowRight") activateTab(tabs[(i + 1) % tabs.length]);
-        if (e.key === "ArrowLeft") activateTab(tabs[(i - 1 + tabs.length) % tabs.length]);
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.setAttribute('aria-selected', 'false'));
+        panels.forEach(p => p.classList.remove('active'));
+
+        tab.setAttribute('aria-selected', 'true');
+        document.getElementById(tab.getAttribute('aria-controls')).classList.add('active');
       });
     });
 
-    document.getElementById("y").textContent = new Date().getFullYear();
+    document.getElementById('y').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
