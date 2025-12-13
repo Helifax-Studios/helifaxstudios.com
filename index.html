@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Cyra Helifax ✨🤍</title>
-  <meta name="description" content="Cyra Helifax — author, aspiring pilot, pastel-coded creator." />
+  <meta name="description" content="Cyra Helifax — author, aspiring pilot, pastel-coded creator hub." />
 
   <style>
     :root{
@@ -237,7 +237,6 @@
     }
     .copyBtn:hover{transform: translateY(-1px); background: rgba(255,255,255,.80)}
     .copyBtn:active{transform: translateY(0)}
-    .copyBtn[disabled]{opacity:.6; cursor:not-allowed}
 
     .toast{
       position: fixed;
@@ -250,7 +249,7 @@
       border-radius: 999px;
       box-shadow: 0 14px 34px rgba(40,15,60,.15);
       color: rgba(43,31,51,.95);
-      font-weight: 700;
+      font-weight: 800;
       display:none;
       z-index: 9999;
     }
@@ -260,21 +259,7 @@
       to{opacity:1; transform: translateX(-50%) translateY(0)}
     }
 
-    /* Gallery */
-    .galleryTop{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-      justify-content:space-between;
-      margin-bottom: 10px;
-    }
-    .hint{
-      color: rgba(93,74,104,.92);
-      font-size: 13px;
-      line-height: 1.4;
-      margin: 0;
-    }
+    /* Gallery (no titles/captions) */
     .galleryGrid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
@@ -291,34 +276,14 @@
       background: rgba(255,255,255,.55);
       box-shadow: 0 12px 26px rgba(40,15,60,.06);
       cursor:pointer;
-      position:relative;
-      min-height: 160px;
-      display:flex;
-      align-items:stretch;
       transition: transform .12s ease, background .12s ease;
     }
     .thumb:hover{transform: translateY(-1px); background: rgba(255,255,255,.75)}
     .thumb img{
       width:100%;
-      height: 210px;
+      height: 230px;
       object-fit: cover;
       display:block;
-    }
-    .thumbCap{
-      position:absolute;
-      left:10px;
-      bottom:10px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.82);
-      border: 1px solid rgba(255,255,255,.95);
-      font-weight: 800;
-      color: rgba(43,31,51,.95);
-      box-shadow: 0 12px 22px rgba(40,15,60,.10);
-      max-width: calc(100% - 20px);
-      overflow:hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
     }
 
     /* Lightbox */
@@ -344,20 +309,10 @@
     .modalTop{
       display:flex;
       align-items:center;
-      justify-content:space-between;
+      justify-content:flex-end;
       gap: 10px;
       padding: 12px 14px;
       border-bottom: 1px solid rgba(0,0,0,.06);
-    }
-    .modalTitle{
-      margin:0;
-      font-weight: 900;
-      color: rgba(43,31,51,.95);
-      font-size: 14px;
-      letter-spacing:.2px;
-      overflow:hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
     }
     .modalClose{
       border:none;
@@ -371,7 +326,7 @@
     .modalImg{
       width:100%;
       display:block;
-      max-height: 72vh;
+      max-height: 78vh;
       object-fit: contain;
       background: rgba(255,255,255,.65);
     }
@@ -589,51 +544,23 @@
             <div class="miniCard">
               <p class="miniTitle">Next up</p>
               <p class="miniText">
-                Add more “pinned projects” here any time (commissions, photography, a game, a song…).
+                Add more pinned projects any time (photography, comms, games, songs…).
               </p>
             </div>
           </div>
         </div>
 
-        <!-- GALLERY -->
+        <!-- GALLERY (auto-load, no titles) -->
         <div class="panel" role="tabpanel" id="panel-gallery" aria-labelledby="tab-gallery">
-          <div class="galleryTop">
-            <div class="miniCard" style="flex:1">
-              <p class="miniTitle">Gallery</p>
-              <p class="miniText">
-                Click any image to open it big. Keep it cute, keep it you.
-              </p>
-              <p class="hint">
-                Tip: put images in a folder like <b>/gallery/</b> and update the filenames in the HTML below.
-              </p>
-            </div>
-          </div>
-
-          <!-- ✅ Replace these with your own images -->
-          <div class="galleryGrid" id="galleryGrid">
-            <div class="thumb" data-full="VRChat_2025-12-11_00-07-17.525_1920x1080_cropped.png" data-title="Avatar / VR">
-              <img src="VRChat_2025-12-11_00-07-17.525_1920x1080_cropped.png" alt="Gallery image">
-              <div class="thumbCap">Avatar / VR</div>
-            </div>
-
-            <div class="thumb" data-full="gallery/your_image_1.jpg" data-title="Drop your image here">
-              <img src="gallery/your_image_1.jpg" alt="Gallery placeholder (add your image)">
-              <div class="thumbCap">Drop your image here</div>
-            </div>
-
-            <div class="thumb" data-full="gallery/your_image_2.jpg" data-title="Another one ✿">
-              <img src="gallery/your_image_2.jpg" alt="Gallery placeholder (add your image)">
-              <div class="thumbCap">Another one ✿</div>
-            </div>
-          </div>
-
-          <div class="miniCard" style="margin-top:12px">
-            <p class="miniTitle">Want it auto-load?</p>
+          <div class="miniCard">
+            <p class="miniTitle">Gallery</p>
             <p class="miniText">
-              If you want, we can make a tiny <b>gallery.js</b> that reads a list of filenames so you only edit one place.
-              (Still GitHub Pages friendly.)
+              Click any image to open it big.
+              <br/>Place files in <b>/gallery/</b> named <b>gallery1</b> to <b>gallery12</b>.
             </p>
           </div>
+
+          <div class="galleryGrid" id="galleryGrid"></div>
         </div>
 
         <!-- WRITING -->
@@ -669,14 +596,14 @@
                 <span class="tMark"></span>
                 <div class="tText">
                   <strong>Next focus</strong>
-                  <span>Refine “shift to cosmic purpose” tone + connective threads</span>
+                  <span>Refine connective threads + deepen the cosmic shift</span>
                 </div>
               </li>
               <li class="tItem">
                 <span class="tMark"></span>
                 <div class="tText">
-                  <strong>Posting plan</strong>
-                  <span>Optional: add a “release schedule” card when ready</span>
+                  <strong>Optional</strong>
+                  <span>Add a release schedule card whenever you’re ready</span>
                 </div>
               </li>
             </ul>
@@ -708,14 +635,14 @@
                 <span class="tMark"></span>
                 <div class="tText">
                   <strong>Foundation</strong>
-                  <span>Budgeting + training research + preparing the path</span>
+                  <span>Training research + budgeting + prep</span>
                 </div>
               </li>
               <li class="tItem">
                 <span class="tMark"></span>
                 <div class="tText">
                   <strong>Next milestone</strong>
-                  <span>Start training block (PPL) when funds + schedule align</span>
+                  <span>Start PPL when funds + schedule align</span>
                 </div>
               </li>
               <li class="tItem">
@@ -726,14 +653,6 @@
                 </div>
               </li>
             </ul>
-          </div>
-
-          <div class="miniCard" style="margin-top:12px">
-            <p class="miniTitle">Add your numbers (optional)</p>
-            <p class="miniText">
-              If you want, we can add a cute “goal tracker” bar (savings / milestones) that stays private
-              unless you choose to show it.
-            </p>
           </div>
         </div>
 
@@ -815,7 +734,6 @@
   <div class="modal" id="modal" aria-hidden="true">
     <div class="modalCard" role="dialog" aria-modal="true" aria-label="Image preview">
       <div class="modalTop">
-        <p class="modalTitle" id="modalTitle">Preview</p>
         <button class="modalClose" id="modalClose" aria-label="Close">Close</button>
       </div>
       <img class="modalImg" id="modalImg" src="" alt="Expanded view">
@@ -828,7 +746,7 @@
     // Year
     document.getElementById('y').textContent = new Date().getFullYear();
 
-    // Tabs (accessible-ish)
+    // Tabs
     const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
     const panels = Array.from(document.querySelectorAll('[role="tabpanel"]'));
 
@@ -863,7 +781,6 @@
         await navigator.clipboard.writeText(text);
         showToast('Copied ✨');
       }catch(err){
-        // Fallback
         const ta = document.createElement('textarea');
         ta.value = text;
         ta.setAttribute('readonly','');
@@ -884,15 +801,13 @@
       });
     });
 
-    // Gallery lightbox
+    // Lightbox
     const modal = document.getElementById('modal');
     const modalImg = document.getElementById('modalImg');
-    const modalTitle = document.getElementById('modalTitle');
     const modalClose = document.getElementById('modalClose');
 
-    function openModal(src, title){
+    function openModal(src){
       modalImg.src = src;
-      modalTitle.textContent = title || 'Preview';
       modal.classList.add('show');
       modal.setAttribute('aria-hidden', 'false');
     }
@@ -902,14 +817,6 @@
       modalImg.src = '';
     }
 
-    document.querySelectorAll('.thumb').forEach(t => {
-      t.addEventListener('click', () => {
-        const src = t.getAttribute('data-full');
-        const title = t.getAttribute('data-title');
-        openModal(src, title);
-      });
-    });
-
     modalClose.addEventListener('click', closeModal);
     modal.addEventListener('click', (e) => {
       if (e.target === modal) closeModal();
@@ -917,6 +824,51 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && modal.classList.contains('show')) closeModal();
     });
+
+    // Gallery auto-load: /gallery/gallery1..gallery12, tries png/jpg/jpeg/webp
+    const galleryGrid = document.getElementById('galleryGrid');
+    const exts = ['png','jpg','jpeg','webp'];
+    const nums = Array.from({length:12}, (_,i)=>i+1);
+
+    function tryLoad(url){
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve(url);
+        img.onerror = () => reject(new Error('fail'));
+        img.src = url;
+      });
+    }
+
+    async function resolvePath(n){
+      for (const ext of exts){
+        const url = `gallery/gallery${n}.${ext}`;
+        try{
+          return await tryLoad(url);
+        }catch{}
+      }
+      return null;
+    }
+
+    (async function buildGallery(){
+      if (!galleryGrid) return;
+      galleryGrid.innerHTML = '';
+
+      for (const n of nums){
+        const src = await resolvePath(n);
+        if (!src) continue;
+
+        const t = document.createElement('div');
+        t.className = 'thumb';
+
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = '';
+
+        t.appendChild(img);
+        t.addEventListener('click', () => openModal(src));
+        galleryGrid.appendChild(t);
+      }
+    })();
   </script>
 </body>
 </html>
