@@ -926,56 +926,61 @@
       }
     })();
 
-    // ===== BLOG POSTS (edit these anytime) =====
-const BLOG_POSTS = [
-  {
-    title: "December momentum",
-    date: "2025-12-13",
-    tags: ["now", "writing", "voice"],
-    body:
-`Job switch stuff is in motion.
-Writing is calling again.
-And voice training is starting to feel less scary and more… mine.
 
-Also: Christmas prep is absolutely taking over my brain in the best way.`
-  },
-  {
-    title: "Yunari, quietly growing",
-    date: "2025-12-10",
-    tags: ["yunari", "lore", "no spoilers"],
-    body:
-`Yunari’s story keeps expanding in the background, even when I’m not “writing.”
-
-Sometimes it feels like the universe is just… waiting.
-Like it’s still speaking, softly, through images and little threads.`
-  },
-  {
-    title: "Aviation (present, not rushed)",
-    date: "2025-12-08",
-    tags: ["aviation", "ground"],
-    body:
-`Still studying ground material.
-Still building a foundation.
-
-I’m not forcing speed.
-I’m choosing consistency.`
+// ===== BLOG: load from /posts/posts.json =====
+async function loadPosts(){
+  try{
+    const res = await fetch('posts/posts.json', { cache: 'no-store' });
+    if (!res.ok) throw new Error('Failed to load posts.json');
+    const posts = await res.json();
+    return Array.isArray(posts) ? posts : [];
+  }catch(e){
+    console.warn(e);
+    return [];
   }
-];
+}
 
 function formatDate(iso){
-  // quick cute format: Dec 13, 2025
   try{
     const d = new Date(iso + "T00:00:00");
     return d.toLocaleDateString(undefined, {year:"numeric", month:"short", day:"numeric"});
   }catch{ return iso; }
 }
 
-const blogGrid = document.getElementById("blogGrid");
-const blogModal = document.getElementById("blogModal");
-const blogClose = document.getElementById("blogClose");
-const blogTitle = document.getElementById("blogTitle");
-const blogMeta = document.getElementById("blogMeta");
-const blogBody = document.getElementById("blogBody");
+async function renderBlog(){
+  const blogGrid = document.getElementById("blogGrid");
+  if (!blogGrid) return;
+
+  const posts = (await loadPosts())
+    .slice()
+    .sort((a,b) => (a.date < b.date ? 1 : -1));
+
+  blogGrid.innerHTML = "";
+
+  posts.forEach(post => {
+    const card = document.createElement("div");
+    card.className = "postCard";
+    const firstLine = (post.body || "").split("\n").filter(Boolean)[0] || "";
+    const excerpt = firstLine.slice(0,110) + (firstLine.length > 110 ? "…" : "");
+
+    card.innerHTML = `
+      <div class="postMeta">
+        <span>${formatDate(post.date)}</span>
+        <span>✿</span>
+      </div>
+      <h4 class="postTitle">${post.title || "Untitled"}</h4>
+      <p class="postExcerpt">${excerpt}</p>
+      <div class="tagRow">
+        ${(post.tags || []).map(t => `<span class="tagPill">${t}</span>`).join("")}
+      </div>
+    `;
+
+    card.addEventListener("click", () => openBlog(post));
+    blogGrid.appendChild(card);
+  });
+}
+
+renderBlog();
 
 function openBlog(post){
   blogTitle.textContent = post.title;
