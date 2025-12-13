@@ -380,6 +380,115 @@
       gap: 10px;
       flex-wrap: wrap;
     }
+    /* ===== Blog (below the main card) ===== */
+.lower{
+  margin-top: 18px;
+  display:grid;
+  gap: 12px;
+}
+
+.blogHeader{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:12px;
+  padding: 16px 18px;
+}
+
+.blogTitle{
+  margin:0;
+  font-size: 18px;
+  letter-spacing:.2px;
+}
+.blogSub{
+  margin:6px 0 0;
+  color: rgba(93,74,104,.92);
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.blogGrid{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding: 0 0 6px;
+}
+@media (max-width: 980px){ .blogGrid{ grid-template-columns: repeat(2, 1fr);} }
+@media (max-width: 620px){ .blogGrid{ grid-template-columns: 1fr;} }
+
+.postCard{
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.75);
+  background: rgba(255,255,255,.62);
+  box-shadow: 0 12px 30px rgba(40,15,60,.06);
+  padding: 14px;
+  cursor:pointer;
+  transition: transform .12s ease, background .12s ease;
+  overflow:hidden;
+}
+.postCard:hover{ transform: translateY(-1px); background: rgba(255,255,255,.78); }
+
+.postMeta{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:center;
+  color: rgba(93,74,104,.9);
+  font-weight: 650;
+  font-size: 12.5px;
+  margin-bottom: 8px;
+}
+.postTitle{
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 800;
+}
+.postExcerpt{
+  margin:0;
+  color: rgba(93,74,104,.95);
+  line-height: 1.45;
+  font-weight: 600;
+}
+
+.tagRow{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top: 10px;
+}
+.tagPill{
+  font-size:12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: linear-gradient(135deg,
+    rgba(255,183,214,.35),
+    rgba(169,220,255,.30));
+  color: rgba(43,31,51,.92);
+  border:1px solid rgba(255,255,255,.65);
+  font-weight: 700;
+}
+
+/* Blog modal */
+.blogModalBody{
+  padding: 14px 16px 18px;
+}
+.blogModalTitle{
+  margin:0 0 6px;
+  font-size: 20px;
+}
+.blogModalMeta{
+  margin:0 0 12px;
+  color: rgba(93,74,104,.92);
+  font-weight: 650;
+  font-size: 13px;
+}
+.blogModalText{
+  margin:0;
+  color: rgba(43,31,51,.92);
+  line-height: 1.6;
+  font-weight: 600;
+  white-space: pre-wrap; /* keeps your line breaks */
+}
   </style>
 </head>
 
@@ -641,6 +750,41 @@
       </footer>
 
     </main>
+    <!-- BLOG (below the main card) -->
+<section class="lower">
+  <div class="card">
+    <div class="blogHeader">
+      <div>
+        <h2 class="blogTitle">Blog ✿</h2>
+        <p class="blogSub">Tiny updates, progress logs, and cozy thoughts.</p>
+      </div>
+      <div class="badge" title="Local posts stored in index.html">
+        <span class="dot"></span> Updates <small>live</small>
+      </div>
+    </div>
+
+    <div class="panelWrap" style="border-top:none;">
+      <div style="padding: 0 18px 18px;">
+        <div class="blogGrid" id="blogGrid"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- Blog modal -->
+<div class="modal" id="blogModal" aria-hidden="true">
+  <div class="modalCard" role="dialog" aria-modal="true" aria-label="Blog post">
+    <div class="modalTop">
+      <button class="modalClose" id="blogClose" aria-label="Close">Close</button>
+    </div>
+    <div class="blogModalBody">
+      <h3 class="blogModalTitle" id="blogTitle"></h3>
+      <p class="blogModalMeta" id="blogMeta"></p>
+      <p class="blogModalText" id="blogBody"></p>
+    </div>
+  </div>
+</div>
+
   </div>
 
   <!-- Lightbox modal -->
@@ -781,6 +925,103 @@
         galleryGrid.appendChild(t);
       }
     })();
+
+    // ===== BLOG POSTS (edit these anytime) =====
+const BLOG_POSTS = [
+  {
+    title: "December momentum",
+    date: "2025-12-13",
+    tags: ["now", "writing", "voice"],
+    body:
+`Job switch stuff is in motion.
+Writing is calling again.
+And voice training is starting to feel less scary and more… mine.
+
+Also: Christmas prep is absolutely taking over my brain in the best way.`
+  },
+  {
+    title: "Yunari, quietly growing",
+    date: "2025-12-10",
+    tags: ["yunari", "lore", "no spoilers"],
+    body:
+`Yunari’s story keeps expanding in the background, even when I’m not “writing.”
+
+Sometimes it feels like the universe is just… waiting.
+Like it’s still speaking, softly, through images and little threads.`
+  },
+  {
+    title: "Aviation (present, not rushed)",
+    date: "2025-12-08",
+    tags: ["aviation", "ground"],
+    body:
+`Still studying ground material.
+Still building a foundation.
+
+I’m not forcing speed.
+I’m choosing consistency.`
+  }
+];
+
+function formatDate(iso){
+  // quick cute format: Dec 13, 2025
+  try{
+    const d = new Date(iso + "T00:00:00");
+    return d.toLocaleDateString(undefined, {year:"numeric", month:"short", day:"numeric"});
+  }catch{ return iso; }
+}
+
+const blogGrid = document.getElementById("blogGrid");
+const blogModal = document.getElementById("blogModal");
+const blogClose = document.getElementById("blogClose");
+const blogTitle = document.getElementById("blogTitle");
+const blogMeta = document.getElementById("blogMeta");
+const blogBody = document.getElementById("blogBody");
+
+function openBlog(post){
+  blogTitle.textContent = post.title;
+  blogMeta.textContent = `${formatDate(post.date)} • ${post.tags.join(" • ")}`;
+  blogBody.textContent = post.body;
+  blogModal.classList.add("show");
+  blogModal.setAttribute("aria-hidden","false");
+}
+
+function closeBlog(){
+  blogModal.classList.remove("show");
+  blogModal.setAttribute("aria-hidden","true");
+}
+
+if (blogGrid){
+  blogGrid.innerHTML = "";
+  BLOG_POSTS
+    .slice()
+    .sort((a,b) => (a.date < b.date ? 1 : -1))
+    .forEach(post => {
+      const card = document.createElement("div");
+      card.className = "postCard";
+      card.innerHTML = `
+        <div class="postMeta">
+          <span>${formatDate(post.date)}</span>
+          <span>✿</span>
+        </div>
+        <h4 class="postTitle">${post.title}</h4>
+        <p class="postExcerpt">${post.body.split("\n").filter(Boolean)[0].slice(0, 110)}${post.body.length > 110 ? "…" : ""}</p>
+        <div class="tagRow">
+          ${post.tags.map(t => `<span class="tagPill">${t}</span>`).join("")}
+        </div>
+      `;
+      card.addEventListener("click", () => openBlog(post));
+      blogGrid.appendChild(card);
+    });
+}
+
+if (blogClose) blogClose.addEventListener("click", closeBlog);
+if (blogModal) blogModal.addEventListener("click", (e) => {
+  if (e.target === blogModal) closeBlog();
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && blogModal && blogModal.classList.contains("show")) closeBlog();
+});
+
   </script>
 </body>
 </html>
