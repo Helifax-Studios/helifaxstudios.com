@@ -380,6 +380,115 @@
       gap: 10px;
       flex-wrap: wrap;
     }
+    /* ===== Blog (below the main card) ===== */
+.lower{
+  margin-top: 18px;
+  display:grid;
+  gap: 12px;
+}
+
+.blogHeader{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:12px;
+  padding: 16px 18px;
+}
+
+.blogTitle{
+  margin:0;
+  font-size: 18px;
+  letter-spacing:.2px;
+}
+.blogSub{
+  margin:6px 0 0;
+  color: rgba(93,74,104,.92);
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.blogGrid{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding: 0 0 6px;
+}
+@media (max-width: 980px){ .blogGrid{ grid-template-columns: repeat(2, 1fr);} }
+@media (max-width: 620px){ .blogGrid{ grid-template-columns: 1fr;} }
+
+.postCard{
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.75);
+  background: rgba(255,255,255,.62);
+  box-shadow: 0 12px 30px rgba(40,15,60,.06);
+  padding: 14px;
+  cursor:pointer;
+  transition: transform .12s ease, background .12s ease;
+  overflow:hidden;
+}
+.postCard:hover{ transform: translateY(-1px); background: rgba(255,255,255,.78); }
+
+.postMeta{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:center;
+  color: rgba(93,74,104,.9);
+  font-weight: 650;
+  font-size: 12.5px;
+  margin-bottom: 8px;
+}
+.postTitle{
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 800;
+}
+.postExcerpt{
+  margin:0;
+  color: rgba(93,74,104,.95);
+  line-height: 1.45;
+  font-weight: 600;
+}
+
+.tagRow{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top: 10px;
+}
+.tagPill{
+  font-size:12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: linear-gradient(135deg,
+    rgba(255,183,214,.35),
+    rgba(169,220,255,.30));
+  color: rgba(43,31,51,.92);
+  border:1px solid rgba(255,255,255,.65);
+  font-weight: 700;
+}
+
+/* Blog modal */
+.blogModalBody{
+  padding: 14px 16px 18px;
+}
+.blogModalTitle{
+  margin:0 0 6px;
+  font-size: 20px;
+}
+.blogModalMeta{
+  margin:0 0 12px;
+  color: rgba(93,74,104,.92);
+  font-weight: 650;
+  font-size: 13px;
+}
+.blogModalText{
+  margin:0;
+  color: rgba(43,31,51,.92);
+  line-height: 1.6;
+  font-weight: 600;
+  white-space: pre-wrap; /* keeps your line breaks */
+}
   </style>
 </head>
 
@@ -431,36 +540,19 @@
           <div class="grid">
             <div class="miniCard">
               <p class="miniTitle">Vibe</p>
-              <p class="miniText">
-                fox heart, starlit soul ✧<br/>
-                soft, pastel, quietly determined
-              </p>
+              <p class="miniText">Venture-hearted • passion-driven • soft by nature</p>
             </div>
             <div class="miniCard">
-              <p class="miniTitle">Currently</p>
-              <p class="miniText">
-                writing stories, building creative spaces,<br/>
-                and working toward the cockpit ✈️
-              </p>
+              <p class="miniTitle">Belief</p>
+              <p class="miniText">“Smile — it looks good on you.”</p>
             </div>
           </div>
 
-          <div class="grid">
-            <div class="miniCard">
-              <p class="miniTitle">A little more</p>
-              <p class="miniText">
-                I’m building a cozy corner of the internet that feels like me — simple on the surface,
-                but deep if you click around.
-              </p>
-            </div>
-            <div class="miniCard">
-              <p class="miniTitle">Quick facts</p>
-              <p class="miniText">
-                Pronouns: any (pref. she/her)<br/>
-                Home base: Helifax Studio<br/>
-                Energy: soft + ambitious
-              </p>
-            </div>
+          <div class="miniCard" style="margin-top:12px">
+            <p class="miniTitle">How I move</p>
+            <p class="miniText">
+              I don’t believe in half-measures. When I commit to something, I give it my full attention and heart.
+            </p>
           </div>
         </div>
 
@@ -521,32 +613,29 @@
         <div class="panel" role="tabpanel" id="panel-projects" aria-labelledby="tab-projects">
           <div class="grid">
             <div class="miniCard">
-              <p class="miniTitle">Yunari & the Stars</p>
+              <p class="miniTitle">Active</p>
               <p class="miniText">
-                A soft-cosmic fantasy about memory, family, and fading starlight.
+                <b>Yunari &amp; The Stars</b> — A story written through my fursona: intimate, cosmic, and deeply personal.<br/>
+                <b>Helifax Studios</b> — The connective space where my ideas, projects, and identities intersect.<br/>
+                <b>Christmas Prep</b> — Thoughtful gifting, planning gatherings, and making the season feel warm.<br/>
+                <b>Voice Training</b> — Learning to sing properly, sustainably, and with intention.
               </p>
             </div>
+
             <div class="miniCard">
-              <p class="miniTitle">Helifax Studio</p>
+              <p class="miniTitle">Slow-burn / on-hold</p>
               <p class="miniText">
-                Pastel-coded storytelling across writing, worlds, and digital spaces.
+                <b>Yunari VR Avatar</b> — A long-term VRChat avatar project bringing Yunari to life.<br/>
+                <b>Aviation Training</b> — Working toward becoming a commercial pilot, one step at a time.
               </p>
             </div>
           </div>
 
-          <div class="grid">
-            <div class="miniCard">
-              <p class="miniTitle">Creator Hub</p>
-              <p class="miniText">
-                A single place where writing + aviation + VR projects can live together without feeling messy.
-              </p>
-            </div>
-            <div class="miniCard">
-              <p class="miniTitle">Next up</p>
-              <p class="miniText">
-                Add more pinned projects any time (photography, comms, games, songs…).
-              </p>
-            </div>
+          <div class="miniCard" style="margin-top:12px">
+            <p class="miniTitle">Fresh</p>
+            <p class="miniText">
+              <b>Rollerblade Dance</b> — Developing an original rollerblade dance for an upcoming competition.
+            </p>
           </div>
         </div>
 
@@ -554,10 +643,7 @@
         <div class="panel" role="tabpanel" id="panel-gallery" aria-labelledby="tab-gallery">
           <div class="miniCard">
             <p class="miniTitle">Gallery</p>
-            <p class="miniText">
-              Click any image to open it big.
-              <br/>Place files in <b>/gallery/</b> named <b>gallery1</b> to <b>gallery12</b>.
-            </p>
+            <p class="miniText">Click any image to open it big.</p>
           </div>
 
           <div class="galleryGrid" id="galleryGrid"></div>
@@ -565,48 +651,33 @@
 
         <!-- WRITING -->
         <div class="panel" role="tabpanel" id="panel-writing" aria-labelledby="tab-writing">
-          <div class="grid">
-            <div class="miniCard">
-              <p class="miniTitle">Writing home</p>
-              <p class="miniText">
-                Wattpad: <a href="https://www.wattpad.com/user/CyraRemiHelifax" target="_blank" rel="noreferrer"><b>@CyraRemiHelifax</b></a><br/>
-                Style: soft-cosmic, emotional, mythic
-              </p>
-            </div>
-            <div class="miniCard">
-              <p class="miniTitle">Featured</p>
-              <p class="miniText">
-                <b>Yunari & the Stars</b><br/>
-                A story about belonging, truth, and the sky forgetting itself.
-              </p>
-            </div>
+          <div class="miniCard">
+            <p class="miniTitle">Featured Work</p>
+            <p class="miniText">
+              <b>Yunari &amp; The Stars</b><br/>
+              A soft-cosmic fantasy following Yunari’s search for truth, family, and the meaning behind fading starlight.
+            </p>
           </div>
 
           <div class="miniCard" style="margin-top:12px">
-            <p class="miniTitle">Milestones</p>
-            <ul class="timeline">
-              <li class="tItem">
-                <span class="tMark"></span>
-                <div class="tText">
-                  <strong>Act IV drafted</strong>
-                  <span>Library Between Realms • Starfall Accord revealed</span>
-                </div>
-              </li>
-              <li class="tItem">
-                <span class="tMark"></span>
-                <div class="tText">
-                  <strong>Next focus</strong>
-                  <span>Refine connective threads + deepen the cosmic shift</span>
-                </div>
-              </li>
-              <li class="tItem">
-                <span class="tMark"></span>
-                <div class="tText">
-                  <strong>Optional</strong>
-                  <span>Add a release schedule card whenever you’re ready</span>
-                </div>
-              </li>
-            </ul>
+            <p class="miniTitle">Selected Lore (no spoilers)</p>
+            <p class="miniText">
+              <b>Yunari</b> — a fox-spirit caught between forms, memory, and purpose<br/>
+              <b>The Stars</b> — once constant, now quietly disappearing<br/>
+              <b>The Starfall Accord</b> — an ancient promise that shaped the heavens<br/>
+              <b>Forgotten Libraries &amp; Lost Songs</b> — places and melodies that remember what the world tried to forget
+            </p>
+          </div>
+
+          <div class="grid">
+            <div class="miniCard" style="margin-top:12px">
+              <p class="miniTitle">Tone</p>
+              <p class="miniText">Introspective, emotional, and quietly mythic.</p>
+            </div>
+            <div class="miniCard" style="margin-top:12px">
+              <p class="miniTitle">Reader invitation</p>
+              <p class="miniText">Follow quietly, or reach out if something resonates.</p>
+            </div>
           </div>
         </div>
 
@@ -614,45 +685,16 @@
         <div class="panel" role="tabpanel" id="panel-aviation" aria-labelledby="tab-aviation">
           <div class="grid">
             <div class="miniCard">
-              <p class="miniTitle">Pilot Path ✈️</p>
-              <p class="miniText">
-                Goal: commercial pilot.<br/>
-                Current phase: planning + saving + learning.
-              </p>
+              <p class="miniTitle">Current stage</p>
+              <p class="miniText">Studying ground material and building a strong foundation.</p>
             </div>
             <div class="miniCard">
-              <p class="miniTitle">Why</p>
+              <p class="miniTitle">Why flying (quietly present)</p>
               <p class="miniText">
-                Because the sky feels like a promise — and I want to keep it.
+                Soaring through the clouds at 500+ miles per hour in a massive metal machine is something thousands of people do every day.
+                I’ve never understood how you <i>wouldn’t</i> want to be the one flying it.
               </p>
             </div>
-          </div>
-
-          <div class="miniCard" style="margin-top:12px">
-            <p class="miniTitle">Progress Timeline</p>
-            <ul class="timeline">
-              <li class="tItem">
-                <span class="tMark"></span>
-                <div class="tText">
-                  <strong>Foundation</strong>
-                  <span>Training research + budgeting + prep</span>
-                </div>
-              </li>
-              <li class="tItem">
-                <span class="tMark"></span>
-                <div class="tText">
-                  <strong>Next milestone</strong>
-                  <span>Start PPL when funds + schedule align</span>
-                </div>
-              </li>
-              <li class="tItem">
-                <span class="tMark"></span>
-                <div class="tText">
-                  <strong>Long-term</strong>
-                  <span>Ratings → hours → commercial career</span>
-                </div>
-              </li>
-            </ul>
           </div>
         </div>
 
@@ -660,35 +702,18 @@
         <div class="panel" role="tabpanel" id="panel-now" aria-labelledby="tab-now">
           <div class="grid">
             <div class="miniCard">
-              <p class="miniTitle">Now</p>
-              <p class="miniText">
-                Building Helifax Studio into a real home for everything I am.
-              </p>
+              <p class="miniTitle">Currently focused</p>
+              <p class="miniText">Navigating a job transition, writing, holiday preparation, and voice training.</p>
             </div>
             <div class="miniCard">
-              <p class="miniTitle">Status</p>
-              <p class="miniText">
-                Energy: soft but focused ✿<br/>
-                Mood: gently ambitious
-              </p>
+              <p class="miniTitle">Energy</p>
+              <p class="miniText">Excited — in a focused, forward-moving way.</p>
             </div>
           </div>
 
-          <div class="grid">
-            <div class="miniCard">
-              <p class="miniTitle">In my hands</p>
-              <p class="miniText">
-                Writing: worldbuilding + edits<br/>
-                Web: polishing this hub<br/>
-                Flight: learning + planning
-              </p>
-            </div>
-            <div class="miniCard">
-              <p class="miniTitle">Open to</p>
-              <p class="miniText">
-                Kind conversations • creative collabs • sharing inspiration
-              </p>
-            </div>
+          <div class="miniCard" style="margin-top:12px">
+            <p class="miniTitle">Open to</p>
+            <p class="miniText">Conversations, collaboration, feedback, and new momentum.</p>
           </div>
         </div>
 
@@ -696,20 +721,17 @@
         <div class="panel" role="tabpanel" id="panel-contact" aria-labelledby="tab-contact">
           <div class="grid">
             <div class="miniCard">
-              <p class="miniTitle">Say hi</p>
+              <p class="miniTitle">Contact</p>
               <p class="miniText">
-                Discord preferred 💬<br/>
-                Open to kind conversations & creative collaboration.
+                <b>Discord is the only place I respond to messages.</b><br/>
+                Other platforms are for viewing if you’re curious.<br/><br/>
+                If you reach out on Discord, please include who you are and why you’re messaging —
+                it helps me tell genuine connections apart from spam.
               </p>
             </div>
-
             <div class="miniCard">
-              <p class="miniTitle">Quick copy</p>
-              <p class="miniText">
-                Discord link: <b>discord.com/users/605927149282656257</b><br/>
-                VRChat ID: <b>usr_d997cab5-4046-4eb5-8ac7-fbb34163f5aa</b><br/>
-                Roblox ID: <b>120940577</b>
-              </p>
+              <p class="miniTitle">Open to</p>
+              <p class="miniText">Creative collaboration and thoughtful feedback, always.</p>
               <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px">
                 <button class="copyBtn" data-copy="https://discord.com/users/605927149282656257">Copy Discord</button>
                 <button class="copyBtn" data-copy="usr_d997cab5-4046-4eb5-8ac7-fbb34163f5aa">Copy VRChat</button>
@@ -728,6 +750,41 @@
       </footer>
 
     </main>
+    <!-- BLOG (below the main card) -->
+<section class="lower">
+  <div class="card">
+    <div class="blogHeader">
+      <div>
+        <h2 class="blogTitle">Blog ✿</h2>
+        <p class="blogSub">Tiny updates, progress logs, and cozy thoughts.</p>
+      </div>
+      <div class="badge" title="Local posts stored in index.html">
+        <span class="dot"></span> Updates <small>live</small>
+      </div>
+    </div>
+
+    <div class="panelWrap" style="border-top:none;">
+      <div style="padding: 0 18px 18px;">
+        <div class="blogGrid" id="blogGrid"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- Blog modal -->
+<div class="modal" id="blogModal" aria-hidden="true">
+  <div class="modalCard" role="dialog" aria-modal="true" aria-label="Blog post">
+    <div class="modalTop">
+      <button class="modalClose" id="blogClose" aria-label="Close">Close</button>
+    </div>
+    <div class="blogModalBody">
+      <h3 class="blogModalTitle" id="blogTitle"></h3>
+      <p class="blogModalMeta" id="blogMeta"></p>
+      <p class="blogModalText" id="blogBody"></p>
+    </div>
+  </div>
+</div>
+
   </div>
 
   <!-- Lightbox modal -->
@@ -831,10 +888,10 @@
     const nums = Array.from({length:12}, (_,i)=>i+1);
 
     function tryLoad(url){
-      return new Promise((resolve, reject) => {
+      return new Promise(resolve => {
         const img = new Image();
         img.onload = () => resolve(url);
-        img.onerror = () => reject(new Error('fail'));
+        img.onerror = () => resolve(null);
         img.src = url;
       });
     }
@@ -842,9 +899,8 @@
     async function resolvePath(n){
       for (const ext of exts){
         const url = `gallery/gallery${n}.${ext}`;
-        try{
-          return await tryLoad(url);
-        }catch{}
+        const ok = await tryLoad(url);
+        if (ok) return ok;
       }
       return null;
     }
@@ -869,6 +925,108 @@
         galleryGrid.appendChild(t);
       }
     })();
+
+
+// ===== BLOG: load from /posts/posts.json =====
+async function loadPosts(){
+  try{
+    const res = await fetch('posts/posts.json', { cache: 'no-store' });
+    if (!res.ok) throw new Error('Failed to load posts.json');
+    const posts = await res.json();
+    return Array.isArray(posts) ? posts : [];
+  }catch(e){
+    console.warn(e);
+    return [];
+  }
+}
+
+function formatDate(iso){
+  try{
+    const d = new Date(iso + "T00:00:00");
+    return d.toLocaleDateString(undefined, {year:"numeric", month:"short", day:"numeric"});
+  }catch{ return iso; }
+}
+
+async function renderBlog(){
+  const blogGrid = document.getElementById("blogGrid");
+  if (!blogGrid) return;
+
+  const posts = (await loadPosts())
+    .slice()
+    .sort((a,b) => (a.date < b.date ? 1 : -1));
+
+  blogGrid.innerHTML = "";
+
+  posts.forEach(post => {
+    const card = document.createElement("div");
+    card.className = "postCard";
+    const firstLine = (post.body || "").split("\n").filter(Boolean)[0] || "";
+    const excerpt = firstLine.slice(0,110) + (firstLine.length > 110 ? "…" : "");
+
+    card.innerHTML = `
+      <div class="postMeta">
+        <span>${formatDate(post.date)}</span>
+        <span>✿</span>
+      </div>
+      <h4 class="postTitle">${post.title || "Untitled"}</h4>
+      <p class="postExcerpt">${excerpt}</p>
+      <div class="tagRow">
+        ${(post.tags || []).map(t => `<span class="tagPill">${t}</span>`).join("")}
+      </div>
+    `;
+
+    card.addEventListener("click", () => openBlog(post));
+    blogGrid.appendChild(card);
+  });
+}
+
+renderBlog();
+
+function openBlog(post){
+  blogTitle.textContent = post.title;
+  blogMeta.textContent = `${formatDate(post.date)} • ${post.tags.join(" • ")}`;
+  blogBody.textContent = post.body;
+  blogModal.classList.add("show");
+  blogModal.setAttribute("aria-hidden","false");
+}
+
+function closeBlog(){
+  blogModal.classList.remove("show");
+  blogModal.setAttribute("aria-hidden","true");
+}
+
+if (blogGrid){
+  blogGrid.innerHTML = "";
+  BLOG_POSTS
+    .slice()
+    .sort((a,b) => (a.date < b.date ? 1 : -1))
+    .forEach(post => {
+      const card = document.createElement("div");
+      card.className = "postCard";
+      card.innerHTML = `
+        <div class="postMeta">
+          <span>${formatDate(post.date)}</span>
+          <span>✿</span>
+        </div>
+        <h4 class="postTitle">${post.title}</h4>
+        <p class="postExcerpt">${post.body.split("\n").filter(Boolean)[0].slice(0, 110)}${post.body.length > 110 ? "…" : ""}</p>
+        <div class="tagRow">
+          ${post.tags.map(t => `<span class="tagPill">${t}</span>`).join("")}
+        </div>
+      `;
+      card.addEventListener("click", () => openBlog(post));
+      blogGrid.appendChild(card);
+    });
+}
+
+if (blogClose) blogClose.addEventListener("click", closeBlog);
+if (blogModal) blogModal.addEventListener("click", (e) => {
+  if (e.target === blogModal) closeBlog();
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && blogModal && blogModal.classList.contains("show")) closeBlog();
+});
+
   </script>
 </body>
 </html>
