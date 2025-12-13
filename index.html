@@ -1026,6 +1026,55 @@ if (blogModal) blogModal.addEventListener("click", (e) => {
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && blogModal && blogModal.classList.contains("show")) closeBlog();
 });
+function escapeHtml(s=""){
+  return s
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+function mdToHtml(md=""){
+  // Escape first so raw HTML can’t be injected
+  let s = escapeHtml(md);
+
+  // Headings (line-based)
+  s = s.replace(/^### (.*)$/gm, "<h4>$1</h4>");
+  s = s.replace(/^## (.*)$/gm, "<h3>$1</h3>");
+  s = s.replace(/^# (.*)$/gm, "<h2>$1</h2>");
+
+  // Bold + italics
+  s = s.replace(/\*\*(.+?)\*\*/g, "<b>$1</b>");
+  s = s.replace(/\*(.+?)\*/g, "<i>$1</i>");
+
+  // Links
+  s = s.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, `<a href="$2" target="_blank" rel="noreferrer">$1</a>`);
+
+  // Bullets: convert lines starting with "- " into list items
+  // Simple approach: wrap contiguous bullet blocks in <ul>
+  s = s.replace(/(?:^|\n)(- .*(?:\n- .*)*)/g, (match) => {
+    const items = match.trim().split("\n").map(l => l.replace(/^- /, "").trim());
+    const lis = items.map(t => `<li>${t}</li>`).join("");
+    return `\n<ul>${lis}</ul>`;
+  });
+
+  // Line breaks
+  s = s.replace(/\n/g, "<br>");
+
+  return s;
+}
+
+function mdToText(md=""){
+  // used for excerpts; strip formatting-ish
+  return md
+    .replace(/^#{1,3}\s+/gm,"")
+    .replace(/\*\*(.+?)\*\*/g,"$1")
+    .replace(/\*(.+?)\*/g,"$1")
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,"$1")
+    .replace(/<\/?[^>]+(>|$)/g,"")
+    .trim();
+}
 
   </script>
 </body>
