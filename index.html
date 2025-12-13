@@ -928,106 +928,17 @@
 
 
 // ===== BLOG: load from /posts/posts.json =====
-async function loadPosts(){
-  try{
-    const res = await fetch('posts/posts.json', { cache: 'no-store' });
-    if (!res.ok) throw new Error('Failed to load posts.json');
-    const posts = await res.json();
-    return Array.isArray(posts) ? posts : [];
-  }catch(e){
-    console.warn(e);
-    return [];
-  }
-}
-
 function formatDate(iso){
   try{
     const d = new Date(iso + "T00:00:00");
-    return d.toLocaleDateString(undefined, {year:"numeric", month:"short", day:"numeric"});
-  }catch{ return iso; }
+    return d.toLocaleDateString(undefined, { year:"numeric", month:"short", day:"numeric" });
+  }catch{
+    return iso || "";
+  }
 }
 
-async function renderBlog(){
-  const blogGrid = document.getElementById("blogGrid");
-  if (!blogGrid) return;
-
-  const posts = (await loadPosts())
-    .slice()
-    .sort((a,b) => (a.date < b.date ? 1 : -1));
-
-  blogGrid.innerHTML = "";
-
-  posts.forEach(post => {
-    const card = document.createElement("div");
-    card.className = "postCard";
-    const firstLine = (post.body || "").split("\n").filter(Boolean)[0] || "";
-    const excerpt = firstLine.slice(0,110) + (firstLine.length > 110 ? "…" : "");
-
-    card.innerHTML = `
-      <div class="postMeta">
-        <span>${formatDate(post.date)}</span>
-        <span>✿</span>
-      </div>
-      <h4 class="postTitle">${post.title || "Untitled"}</h4>
-      <p class="postExcerpt">${excerpt}</p>
-      <div class="tagRow">
-        ${(post.tags || []).map(t => `<span class="tagPill">${t}</span>`).join("")}
-      </div>
-    `;
-
-    card.addEventListener("click", () => openBlog(post));
-    blogGrid.appendChild(card);
-  });
-}
-
-renderBlog();
-
-function openBlog(post){
-  blogTitle.textContent = post.title;
-  blogMeta.textContent = `${formatDate(post.date)} • ${post.tags.join(" • ")}`;
-  blogBody.textContent = post.body;
-  blogModal.classList.add("show");
-  blogModal.setAttribute("aria-hidden","false");
-}
-
-function closeBlog(){
-  blogModal.classList.remove("show");
-  blogModal.setAttribute("aria-hidden","true");
-}
-
-if (blogGrid){
-  blogGrid.innerHTML = "";
-  BLOG_POSTS
-    .slice()
-    .sort((a,b) => (a.date < b.date ? 1 : -1))
-    .forEach(post => {
-      const card = document.createElement("div");
-      card.className = "postCard";
-      card.innerHTML = `
-        <div class="postMeta">
-          <span>${formatDate(post.date)}</span>
-          <span>✿</span>
-        </div>
-        <h4 class="postTitle">${post.title}</h4>
-        <p class="postExcerpt">${post.body.split("\n").filter(Boolean)[0].slice(0, 110)}${post.body.length > 110 ? "…" : ""}</p>
-        <div class="tagRow">
-          ${post.tags.map(t => `<span class="tagPill">${t}</span>`).join("")}
-        </div>
-      `;
-      card.addEventListener("click", () => openBlog(post));
-      blogGrid.appendChild(card);
-    });
-}
-
-if (blogClose) blogClose.addEventListener("click", closeBlog);
-if (blogModal) blogModal.addEventListener("click", (e) => {
-  if (e.target === blogModal) closeBlog();
-});
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && blogModal && blogModal.classList.contains("show")) closeBlog();
-});
 function escapeHtml(s=""){
-  return s
+  return String(s)
     .replaceAll("&","&amp;")
     .replaceAll("<","&lt;")
     .replaceAll(">","&gt;")
@@ -1035,39 +946,42 @@ function escapeHtml(s=""){
     .replaceAll("'","&#039;");
 }
 
+// Very small Markdown renderer (safe: escapes HTML first)
+// Supports: # ## ###, **bold**, *italic*, [text](url), - bullets, line breaks
 function mdToHtml(md=""){
-  // Escape first so raw HTML can’t be injected
   let s = escapeHtml(md);
 
-  // Headings (line-based)
+  // headings
   s = s.replace(/^### (.*)$/gm, "<h4>$1</h4>");
   s = s.replace(/^## (.*)$/gm, "<h3>$1</h3>");
   s = s.replace(/^# (.*)$/gm, "<h2>$1</h2>");
 
-  // Bold + italics
+  // bold + italics
   s = s.replace(/\*\*(.+?)\*\*/g, "<b>$1</b>");
   s = s.replace(/\*(.+?)\*/g, "<i>$1</i>");
 
-  // Links
+  // links
   s = s.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, `<a href="$2" target="_blank" rel="noreferrer">$1</a>`);
 
-  // Bullets: convert lines starting with "- " into list items
-  // Simple approach: wrap contiguous bullet blocks in <ul>
+  // bullets: wrap contiguous "- " blocks into <ul>
   s = s.replace(/(?:^|\n)(- .*(?:\n- .*)*)/g, (match) => {
-    const items = match.trim().split("\n").map(l => l.replace(/^- /, "").trim());
-    const lis = items.map(t => `<li>${t}</li>`).join("");
+    const lines = match.trim().split("\n").filter(Boolean);
+    const lis = lines
+      .map(l => l.replace(/^- /, "").trim())
+      .map(t => `<li>${t}</li>`)
+      .join("");
     return `\n<ul>${lis}</ul>`;
   });
 
-  // Line breaks
+  // line breaks (after lists/heads/bold/italics)
   s = s.replace(/\n/g, "<br>");
 
   return s;
 }
 
+// For card excerpts (strip most formatting)
 function mdToText(md=""){
-  // used for excerpts; strip formatting-ish
-  return md
+  return String(md)
     .replace(/^#{1,3}\s+/gm,"")
     .replace(/\*\*(.+?)\*\*/g,"$1")
     .replace(/\*(.+?)\*/g,"$1")
@@ -1075,6 +989,87 @@ function mdToText(md=""){
     .replace(/<\/?[^>]+(>|$)/g,"")
     .trim();
 }
+
+// --- Modal hooks ---
+const blogGrid  = document.getElementById("blogGrid");
+const blogModal = document.getElementById("blogModal");
+const blogClose = document.getElementById("blogClose");
+const blogTitle = document.getElementById("blogTitle");
+const blogMeta  = document.getElementById("blogMeta");
+const blogBody  = document.getElementById("blogBody");
+
+function openBlog(post){
+  if (!blogModal) return;
+  blogTitle.textContent = post.title || "Untitled";
+  blogMeta.textContent  = `${formatDate(post.date)}${(post.tags && post.tags.length) ? " • " + post.tags.join(" • ") : ""}`;
+  blogBody.innerHTML    = mdToHtml(post.body || "");
+  blogModal.classList.add("show");
+  blogModal.setAttribute("aria-hidden","false");
+}
+
+function closeBlog(){
+  if (!blogModal) return;
+  blogModal.classList.remove("show");
+  blogModal.setAttribute("aria-hidden","true");
+  blogBody.innerHTML = "";
+}
+
+if (blogClose) blogClose.addEventListener("click", closeBlog);
+if (blogModal) blogModal.addEventListener("click", (e) => { if (e.target === blogModal) closeBlog(); });
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && blogModal && blogModal.classList.contains("show")) closeBlog();
+});
+
+// --- Load posts from posts/posts.json ---
+async function loadPosts(){
+  try{
+    const res = await fetch("posts/posts.json", { cache: "no-store" });
+    if (!res.ok) throw new Error("Failed to load posts/posts.json");
+    const posts = await res.json();
+    return Array.isArray(posts) ? posts : [];
+  }catch(err){
+    console.warn(err);
+    return [];
+  }
+}
+
+// --- Render blog cards ---
+async function renderBlog(){
+  if (!blogGrid) return;
+
+  const posts = (await loadPosts())
+    .slice()
+    .sort((a,b) => (String(a.date) < String(b.date) ? 1 : -1));
+
+  blogGrid.innerHTML = "";
+
+  posts.forEach(post => {
+    const card = document.createElement("div");
+    card.className = "postCard";
+
+    const firstLine = String(post.body || "").split("\n").filter(Boolean)[0] || "";
+    const cleaned = mdToText(firstLine);
+    const excerpt = cleaned.slice(0, 110) + (cleaned.length > 110 ? "…" : "");
+
+    const tagsHtml = (post.tags || []).map(t => `<span class="tagPill">${escapeHtml(t)}</span>`).join("");
+
+    card.innerHTML = `
+      <div class="postMeta">
+        <span>${escapeHtml(formatDate(post.date))}</span>
+        <span>✿</span>
+      </div>
+      <h4 class="postTitle">${escapeHtml(post.title || "Untitled")}</h4>
+      <p class="postExcerpt">${escapeHtml(excerpt)}</p>
+      <div class="tagRow">${tagsHtml}</div>
+    `;
+
+    card.addEventListener("click", () => openBlog(post));
+    blogGrid.appendChild(card);
+  });
+}
+
+// Call once on load
+renderBlog();
 
   </script>
 </body>
