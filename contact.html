@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact — Cyro Helifax</title>
+  <meta name="description" content="Start a project with Cyro Helifax (Helifax Studios)." />
+  <meta name="theme-color" content="#f3b3c8" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="brand" href="index.html" aria-label="Helifax Studios home">
+        <img class="brand-mark" src="assets/Helifax.png" alt="Helifax Studios logo" />
+        <div class="brand-text">
+          <span class="brand-name">Cyro Helifax</span>
+          <span class="brand-sub">Helifax Studios</span>
+        </div>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav id="site-nav" class="nav">
+        <a href="services.html">Services</a>
+        <a href="work.html">Work</a>
+        <a href="about.html">About</a>
+        <a class="active btn btn-sm" href="contact.html">Start a Project</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="container">
+        <p class="kicker">Contact</p>
+        <h1>Start a project</h1>
+        <p class="lede">Tell me what you need and when you want to launch. I’ll reply with next steps.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container split">
+        <div class="card">
+          <h2 class="card-title">Project form</h2>
+
+          <!--
+            Replace FORM_ENDPOINT with your form handler:
+            - Formspree: https://formspree.io/f/xxxxxx
+            - Netlify Forms: remove action/method and add name + netlify attributes
+          -->
+          <form class="form" action="FORM_ENDPOINT" method="POST">
+            <label>
+              <span>Name</span>
+              <input name="name" type="text" autocomplete="name" required />
+            </label>
+
+            <label>
+              <span>Email</span>
+              <input name="email" type="email" autocomplete="email" required />
+            </label>
+
+            <label>
+              <span>Business name</span>
+              <input name="business" type="text" />
+            </label>
+
+            <label>
+              <span>What do you need?</span>
+              <select name="package" required>
+                <option value="" disabled selected>Select an option</option>
+                <option>Starter Presence (1–3 pages)</option>
+                <option>Business Website (5–7 pages)</option>
+                <option>Brand + Web</option>
+                <option>Not sure yet</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Ideal launch date</span>
+              <input name="launch" type="text" placeholder="Ex: end of February" />
+            </label>
+
+            <label>
+              <span>Details</span>
+              <textarea name="details" rows="6" placeholder="What do you do? What should the site accomplish? Any examples you like?"></textarea>
+            </label>
+
+            <button class="btn" type="submit">Send</button>
+            <p class="muted small">By sending, you agree to be contacted about your project.</p>
+          </form>
+        </div>
+
+        <div>
+          <div class="card">
+            <h2 class="card-title">What happens next</h2>
+            <ol class="list">
+              <li>Quick reply (usually within 1–2 business days)</li>
+              <li>Short call or message to confirm scope</li>
+              <li>Quote + timeline</li>
+              <li>Design → build → launch</li>
+            </ol>
+          </div>
+
+          <div class="card section-pad-top">
+            <h2 class="card-title">Prefer email?</h2>
+            <p class="muted">Add your email here once you set up your domain:</p>
+            <p class="mono">hello@yourdomain.com</p>
+            <p class="muted small">Tip: custom domain email increases trust instantly.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-row">
+      <div>
+        <p class="footer-brand">Cyro Helifax <span class="muted">— Helifax Studios</span></p>
+        <p class="muted small">Let’s make your website match your work.</p>
+      </div>
+      <div class="footer-links">
+        <a href="services.html">Services</a>
+        <a href="work.html">Work</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
