@@ -2,1075 +2,180 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Cyra Helifax ✨🤍</title>
-  <meta name="description" content="Cyra Helifax — author, aspiring pilot, pastel-coded creator hub." />
-
-  <style>
-    :root{
-      --bg1:#ffe6f3;
-      --bg2:#efe6ff;
-
-      --ink:#2b1f33;
-      --muted:#5d4a68;
-      --line:#ffffff88;
-
-      --lav:#cbb7ff;
-      --pink:#ffb7d6;
-      --blue:#a9dcff;
-
-      --shadow: 0 18px 45px rgba(40, 15, 60, .15);
-      --radius: 22px;
-    }
-
-    *{box-sizing:border-box}
-    html,body{height:100%}
-
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      color:var(--ink);
-      background:
-        radial-gradient(900px 600px at 20% -10%, var(--pink), transparent 60%),
-        radial-gradient(900px 600px at 90% 10%, var(--blue), transparent 55%),
-        radial-gradient(1000px 700px at 50% 110%, var(--lav), transparent 60%),
-        linear-gradient(135deg, var(--bg1), var(--bg2));
-      padding: 26px 14px 60px;
-    }
-
-    .wrap{max-width:980px;margin:0 auto}
-
-    .card{
-      background: linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,255,255,.68));
-      border:1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      backdrop-filter: blur(10px);
-    }
-
-    .top{
-      display:flex;
-      gap:18px;
-      padding:22px;
-      align-items:center;
-    }
-
-    /* PROFILE IMAGE */
-    .pfp{
-      width:88px;
-      height:88px;
-      border-radius:26px;
-      overflow:hidden;
-      flex:0 0 auto;
-      border: 1px solid rgba(255,255,255,.9);
-      box-shadow:
-        0 14px 32px rgba(255,183,214,.35),
-        0 0 0 4px rgba(255,255,255,.4);
-      background: linear-gradient(135deg, var(--pink), var(--lav), var(--blue));
-    }
-
-    .pfp img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
-
-    h1{margin:0;font-size:32px;letter-spacing:.2px}
-    .subtitle{margin:6px 0 0;color:var(--muted)}
-    .bio{margin:10px 0 0;line-height:1.55;color:rgba(43,31,51,.92);max-width:60ch}
-
-    /* Pinned badges */
-    .pinned{
-      padding: 0 22px 18px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      align-items:center;
-    }
-    .badge{
-      display:inline-flex;
-      gap:8px;
-      align-items:center;
-      padding:10px 12px;
-      border-radius: 999px;
-      border:1px solid rgba(255,255,255,.85);
-      background: rgba(255,255,255,.55);
-      box-shadow: 0 10px 22px rgba(40,15,60,.06);
-      color: rgba(43,31,51,.92);
-      font-weight: 650;
-      user-select:none;
-    }
-    .dot{
-      width:10px;height:10px;border-radius:999px;
-      background: linear-gradient(135deg, rgba(255,183,214,.9), rgba(169,220,255,.9));
-      box-shadow: 0 6px 16px rgba(255,183,214,.35);
-      flex:0 0 auto;
-    }
-    .badge small{
-      color: rgba(93,74,104,.9);
-      font-weight:600;
-    }
-
-    /* Tabs */
-    .pills{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      padding: 0 22px 18px;
-    }
-
-    .pill{
-      appearance:none;
-      border:1px solid rgba(255,255,255,.85);
-      background: rgba(255,255,255,.55);
-      color:var(--ink);
-      border-radius: 999px;
-      padding: 10px 14px;
-      cursor:pointer;
-      font-weight: 650;
-      transition: transform .12s ease, background .12s ease;
-      box-shadow: 0 10px 22px rgba(40,15,60,.08);
-      user-select:none;
-    }
-    .pill:hover{transform: translateY(-1px); background: rgba(255,255,255,.72)}
-    .pill[aria-selected="true"]{
-      background: linear-gradient(135deg,
-        rgba(255,183,214,.55),
-        rgba(203,183,255,.55),
-        rgba(169,220,255,.55));
-    }
-
-    .panelWrap{
-      border-top: 1px solid rgba(255,255,255,.7);
-      background: rgba(255,255,255,.35);
-    }
-
-    .panel{
-      display:none;
-      padding: 18px 22px 22px;
-      animation: pop .18s ease-out;
-    }
-    .panel.active{display:block}
-
-    @keyframes pop{
-      from{opacity:0; transform: translateY(-6px)}
-      to{opacity:1; transform: translateY(0)}
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:12px;
-      margin-top: 10px;
-    }
-    @media (max-width:860px){
-      .top{flex-direction:column;align-items:flex-start}
-      .grid{grid-template-columns:1fr}
-    }
-
-    .miniCard{
-      border:1px solid rgba(255,255,255,.75);
-      background: rgba(255,255,255,.6);
-      border-radius: 18px;
-      padding: 14px;
-      box-shadow: 0 12px 30px rgba(40,15,60,.06);
-    }
-
-    .miniTitle{margin:0 0 6px;font-weight:750}
-    .miniText{margin:0;color:rgba(93,74,104,.95);line-height:1.45}
-
-    /* Links */
-    .linkList{list-style:none;margin:0;padding:0;display:grid;gap:10px}
-
-    .linkRow{
-      display:flex;
-      gap:10px;
-      align-items:stretch;
-    }
-
-    .link{
-      flex: 1 1 auto;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding: 12px 14px;
-      border-radius: 16px;
-      border:1px solid rgba(255,255,255,.78);
-      background: rgba(255,255,255,.65);
-      transition: transform .12s ease, background .12s ease;
-      text-decoration:none;
-      color:inherit;
-      min-height: 46px;
-    }
-    .link:hover{transform: translateY(-1px); background: rgba(255,255,255,.82)}
-
-    .tag{
-      font-size:12px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: linear-gradient(135deg,
-        rgba(255,183,214,.35),
-        rgba(169,220,255,.30));
-      color: rgba(43,31,51,.92);
-      border:1px solid rgba(255,255,255,.65);
-    }
-
-    .copyBtn{
-      flex: 0 0 auto;
-      min-width: 116px;
-      border-radius: 16px;
-      border:1px solid rgba(255,255,255,.78);
-      background: rgba(255,255,255,.62);
-      box-shadow: 0 12px 24px rgba(40,15,60,.06);
-      cursor:pointer;
-      font-weight: 700;
-      color: rgba(43,31,51,.92);
-      transition: transform .12s ease, background .12s ease;
-      padding: 12px 12px;
-      display:inline-flex;
-      justify-content:center;
-      align-items:center;
-      user-select:none;
-      white-space:nowrap;
-    }
-    .copyBtn:hover{transform: translateY(-1px); background: rgba(255,255,255,.80)}
-    .copyBtn:active{transform: translateY(0)}
-
-    .toast{
-      position: fixed;
-      left: 50%;
-      bottom: 18px;
-      transform: translateX(-50%);
-      background: rgba(255,255,255,.86);
-      border: 1px solid rgba(255,255,255,.9);
-      padding: 10px 14px;
-      border-radius: 999px;
-      box-shadow: 0 14px 34px rgba(40,15,60,.15);
-      color: rgba(43,31,51,.95);
-      font-weight: 800;
-      display:none;
-      z-index: 9999;
-    }
-    .toast.show{display:block; animation: toastPop .18s ease-out}
-    @keyframes toastPop{
-      from{opacity:0; transform: translateX(-50%) translateY(10px)}
-      to{opacity:1; transform: translateX(-50%) translateY(0)}
-    }
-
-    /* Gallery (no titles/captions) */
-    .galleryGrid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-top: 10px;
-    }
-    @media (max-width:860px){ .galleryGrid{grid-template-columns: repeat(2, 1fr);} }
-    @media (max-width:520px){ .galleryGrid{grid-template-columns: 1fr;} }
-
-    .thumb{
-      border-radius: 18px;
-      overflow:hidden;
-      border: 1px solid rgba(255,255,255,.75);
-      background: rgba(255,255,255,.55);
-      box-shadow: 0 12px 26px rgba(40,15,60,.06);
-      cursor:pointer;
-      transition: transform .12s ease, background .12s ease;
-    }
-    .thumb:hover{transform: translateY(-1px); background: rgba(255,255,255,.75)}
-    .thumb img{
-      width:100%;
-      height: 230px;
-      object-fit: cover;
-      display:block;
-    }
-
-    /* Lightbox */
-    .modal{
-      position: fixed;
-      inset: 0;
-      background: rgba(20,10,30,.55);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding: 18px;
-      z-index: 9998;
-    }
-    .modal.show{display:flex}
-    .modalCard{
-      width: min(980px, 100%);
-      border-radius: 22px;
-      overflow:hidden;
-      border: 1px solid rgba(255,255,255,.55);
-      background: rgba(255,255,255,.92);
-      box-shadow: 0 22px 60px rgba(0,0,0,.35);
-    }
-    .modalTop{
-      display:flex;
-      align-items:center;
-      justify-content:flex-end;
-      gap: 10px;
-      padding: 12px 14px;
-      border-bottom: 1px solid rgba(0,0,0,.06);
-    }
-    .modalClose{
-      border:none;
-      background: rgba(255,255,255,.7);
-      border: 1px solid rgba(0,0,0,.06);
-      border-radius: 14px;
-      padding: 8px 10px;
-      cursor:pointer;
-      font-weight: 900;
-    }
-    .modalImg{
-      width:100%;
-      display:block;
-      max-height: 78vh;
-      object-fit: contain;
-      background: rgba(255,255,255,.65);
-    }
-
-    /* Timeline list */
-    .timeline{
-      margin: 8px 0 0;
-      padding: 0;
-      list-style:none;
-      display:grid;
-      gap: 10px;
-    }
-    .tItem{
-      display:flex;
-      gap: 10px;
-      align-items:flex-start;
-      padding: 12px 12px;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.78);
-      background: rgba(255,255,255,.62);
-      box-shadow: 0 12px 24px rgba(40,15,60,.05);
-    }
-    .tMark{
-      width:12px;height:12px;border-radius:999px;
-      margin-top: 4px;
-      background: linear-gradient(135deg, rgba(255,183,214,.9), rgba(169,220,255,.9));
-      box-shadow: 0 10px 20px rgba(255,183,214,.25);
-      flex: 0 0 auto;
-    }
-    .tText strong{display:block}
-    .tText{
-      color: rgba(93,74,104,.95);
-      line-height: 1.45;
-      font-weight: 650;
-    }
-    .tText span{
-      display:block;
-      color: rgba(93,74,104,.9);
-      font-weight: 600;
-      margin-top: 2px;
-      font-size: 13px;
-    }
-
-    /* Footer */
-    .footer{
-      padding: 14px 22px 20px;
-      color: rgba(93,74,104,.85);
-      font-size: 13px;
-      display:flex;
-      justify-content: space-between;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    /* ===== Blog (below the main card) ===== */
-.lower{
-  margin-top: 18px;
-  display:grid;
-  gap: 12px;
-}
-
-.blogHeader{
-  display:flex;
-  align-items:flex-end;
-  justify-content:space-between;
-  gap:12px;
-  padding: 16px 18px;
-}
-
-.blogTitle{
-  margin:0;
-  font-size: 18px;
-  letter-spacing:.2px;
-}
-.blogSub{
-  margin:6px 0 0;
-  color: rgba(93,74,104,.92);
-  font-weight: 600;
-  line-height: 1.35;
-}
-
-.blogGrid{
-  display:grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  padding: 0 0 6px;
-}
-@media (max-width: 980px){ .blogGrid{ grid-template-columns: repeat(2, 1fr);} }
-@media (max-width: 620px){ .blogGrid{ grid-template-columns: 1fr;} }
-
-.postCard{
-  border-radius: 18px;
-  border: 1px solid rgba(255,255,255,.75);
-  background: rgba(255,255,255,.62);
-  box-shadow: 0 12px 30px rgba(40,15,60,.06);
-  padding: 14px;
-  cursor:pointer;
-  transition: transform .12s ease, background .12s ease;
-  overflow:hidden;
-}
-.postCard:hover{ transform: translateY(-1px); background: rgba(255,255,255,.78); }
-
-.postMeta{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  align-items:center;
-  color: rgba(93,74,104,.9);
-  font-weight: 650;
-  font-size: 12.5px;
-  margin-bottom: 8px;
-}
-.postTitle{
-  margin: 0 0 8px;
-  font-size: 16px;
-  font-weight: 800;
-}
-.postExcerpt{
-  margin:0;
-  color: rgba(93,74,104,.95);
-  line-height: 1.45;
-  font-weight: 600;
-}
-
-.tagRow{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-top: 10px;
-}
-.tagPill{
-  font-size:12px;
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: linear-gradient(135deg,
-    rgba(255,183,214,.35),
-    rgba(169,220,255,.30));
-  color: rgba(43,31,51,.92);
-  border:1px solid rgba(255,255,255,.65);
-  font-weight: 700;
-}
-
-/* Blog modal */
-.blogModalBody{
-  padding: 14px 16px 18px;
-}
-.blogModalTitle{
-  margin:0 0 6px;
-  font-size: 20px;
-}
-.blogModalMeta{
-  margin:0 0 12px;
-  color: rgba(93,74,104,.92);
-  font-weight: 650;
-  font-size: 13px;
-}
-.blogModalText{
-  margin:0;
-  color: rgba(43,31,51,.92);
-  line-height: 1.6;
-  font-weight: 600;
-  white-space: pre-wrap; /* keeps your line breaks */
-}
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cyro Helifax — Helifax Studios</title>
+  <meta name="description" content="Cyro Helifax designs and builds clean, custom websites for small businesses and brands. Helifax Studios." />
+  <meta name="theme-color" content="#f3b3c8" />
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
-
 <body>
-  <div class="wrap">
-    <main class="card">
+  <a class="skip" href="#main">Skip to content</a>
 
-      <!-- HEADER -->
-      <section class="top">
-        <div class="pfp">
-          <img src="VRChat_2025-12-11_00-07-17.525_1920x1080_cropped.png" alt="Cyra Helifax avatar">
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="brand" href="index.html" aria-label="Helifax Studios home">
+        <img class="brand-mark" src="assets/Helifax.png" alt="Helifax Studios logo" />
+        <div class="brand-text">
+          <span class="brand-name">Cyro Helifax</span>
+          <span class="brand-sub">Helifax Studios</span>
         </div>
-        <div>
-          <h1>Cyra Helifax ✨🤍</h1>
-          <p class="subtitle">cyrahelifax • any (pref. she/her) 🐰&lt;3</p>
-          <p class="bio">
-            Author & aspiring pilot ✈️<br/>
-            Never settle for good enough.<br/>
-            Soft-hearted, star-lit, and quietly building something meaningful.
-          </p>
-        </div>
-      </section>
+      </a>
 
-      <!-- PINNED BADGES -->
-      <section class="pinned" aria-label="Pinned identity">
-        <span class="badge"><span class="dot"></span> Author <small>Wattpad</small></span>
-        <span class="badge"><span class="dot"></span> Pilot Path <small>in progress</small></span>
-        <span class="badge"><span class="dot"></span> VR Creator <small>VRChat</small></span>
-        <span class="badge"><span class="dot"></span> Helifax Studio <small>creator hub</small></span>
-      </section>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+        <span></span><span></span><span></span>
+      </button>
 
-      <!-- TABS -->
-      <nav class="pills" role="tablist" aria-label="About tabs">
-        <button class="pill" role="tab" aria-selected="true"  aria-controls="panel-about"    id="tab-about">About</button>
-        <button class="pill" role="tab" aria-selected="false" aria-controls="panel-links"    id="tab-links">Links</button>
-        <button class="pill" role="tab" aria-selected="false" aria-controls="panel-projects" id="tab-projects">Projects</button>
-        <button class="pill" role="tab" aria-selected="false" aria-controls="panel-gallery"  id="tab-gallery">Gallery</button>
-        <button class="pill" role="tab" aria-selected="false" aria-controls="panel-writing"  id="tab-writing">Writing</button>
-        <button class="pill" role="tab" aria-selected="false" aria-controls="panel-aviation" id="tab-aviation">Aviation</button>
-        <button class="pill" role="tab" aria-selected="false" aria-controls="panel-now"      id="tab-now">Now</button>
-        <button class="pill" role="tab" aria-selected="false" aria-controls="panel-contact"  id="tab-contact">Contact</button>
+      <nav id="site-nav" class="nav">
+        <a href="services.html">Services</a>
+        <a href="work.html">Work</a>
+        <a href="about.html">About</a>
+        <a class="btn btn-sm" href="contact.html">Start a Project</a>
       </nav>
+    </div>
+  </header>
 
-      <!-- PANELS -->
-      <section class="panelWrap">
+  <main id="main">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="kicker">Designer & Developer</p>
+          <h1>Clean, custom websites for businesses that want to look established.</h1>
+          <p class="lede">
+            I design and build modern sites with strong visuals, fast load times, and a clear process—
+            so you can show up online with confidence.
+          </p>
 
-        <!-- ABOUT -->
-        <div class="panel active" role="tabpanel" id="panel-about" aria-labelledby="tab-about">
-          <div class="grid">
-            <div class="miniCard">
-              <p class="miniTitle">Vibe</p>
-              <p class="miniText">Venture-hearted • passion-driven • soft by nature</p>
-            </div>
-            <div class="miniCard">
-              <p class="miniTitle">Belief</p>
-              <p class="miniText">“Smile — it looks good on you.”</p>
-            </div>
+          <div class="hero-actions">
+            <a class="btn" href="contact.html">Start a Project</a>
+            <a class="btn btn-ghost" href="work.html">See Work</a>
           </div>
 
-          <div class="miniCard" style="margin-top:12px">
-            <p class="miniTitle">How I move</p>
-            <p class="miniText">
-              I don’t believe in half-measures. When I commit to something, I give it my full attention and heart.
-            </p>
+          <div class="trust">
+            <div class="chip">Custom design</div>
+            <div class="chip">Mobile-first</div>
+            <div class="chip">Fast + SEO-ready</div>
+            <div class="chip">Clear pricing</div>
           </div>
         </div>
 
-        <!-- LINKS -->
-        <div class="panel" role="tabpanel" id="panel-links" aria-labelledby="tab-links">
-          <div class="miniCard">
-            <p class="miniTitle">Hub Links</p>
-            <p class="miniText">Everything important, in one place. (Copy buttons included ✨)</p>
+        <div class="hero-card">
+          <div class="card card-glow">
+            <h2 class="card-title">What I do</h2>
+            <ul class="list">
+              <li><strong>Web design</strong> — clean layouts that match your brand</li>
+              <li><strong>Web builds</strong> — responsive, fast, and reliable</li>
+              <li><strong>Brand polish</strong> — typography, color, and visual direction</li>
+            </ul>
+            <div class="card-cta">
+              <a class="text-link" href="services.html">View services</a>
+              <span class="dot">•</span>
+              <a class="text-link" href="contact.html">Get a quote</a>
+            </div>
           </div>
 
-          <ul class="linkList" style="margin-top:10px">
-            <li>
-              <div class="linkRow">
-                <a class="link" href="https://www.wattpad.com/user/CyraRemiHelifax" target="_blank" rel="noreferrer">
-                  <span>Wattpad</span><span class="tag">writing</span>
-                </a>
-              </div>
-            </li>
+          <div class="mini-grid">
+            <div class="mini">
+              <p class="mini-k">Typical timeline</p>
+              <p class="mini-v">1–3 weeks</p>
+            </div>
+            <div class="mini">
+              <p class="mini-k">Best for</p>
+              <p class="mini-v">Local + remote</p>
+            </div>
+            <div class="mini">
+              <p class="mini-k">Delivery</p>
+              <p class="mini-v">Design → Launch</p>
+            </div>
+            <div class="mini">
+              <p class="mini-k">Support</p>
+              <p class="mini-v">Optional monthly</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-            <li>
-              <div class="linkRow">
-                <a class="link" href="https://cyrahelifax.mypixieset.com/" target="_blank" rel="noreferrer">
-                  <span>Author Page</span><span class="tag">portfolio</span>
-                </a>
-              </div>
-            </li>
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Simple process. Clean results.</h2>
+          <p>Clients move faster when the next step is obvious.</p>
+        </div>
 
-            <li>
-              <div class="linkRow">
-                <a class="link" href="https://discord.com/users/605927149282656257" target="_blank" rel="noreferrer">
-                  <span>Discord</span><span class="tag">chat</span>
-                </a>
-                <button class="copyBtn" data-copy="https://discord.com/users/605927149282656257">Copy link</button>
-              </div>
-            </li>
+        <div class="steps">
+          <div class="step card">
+            <p class="step-n">01</p>
+            <h3>Discover</h3>
+            <p>Quick intake, goals, examples you like, what matters most.</p>
+          </div>
+          <div class="step card">
+            <p class="step-n">02</p>
+            <h3>Design</h3>
+            <p>Modern layout + typography that fits your brand and audience.</p>
+          </div>
+          <div class="step card">
+            <p class="step-n">03</p>
+            <h3>Build</h3>
+            <p>Responsive pages, fast performance, and clean interactions.</p>
+          </div>
+          <div class="step card">
+            <p class="step-n">04</p>
+            <h3>Launch</h3>
+            <p>Domain hookup, SEO basics, and a smooth handoff.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-            <li>
-              <div class="linkRow">
-                <a class="link" href="https://vrchat.com/home/user/usr_d997cab5-4046-4eb5-8ac7-fbb34163f5aa" target="_blank" rel="noreferrer">
-                  <span>VRChat</span><span class="tag">vr</span>
-                </a>
-                <button class="copyBtn" data-copy="usr_d997cab5-4046-4eb5-8ac7-fbb34163f5aa">Copy ID</button>
-              </div>
-            </li>
+    <section class="section section-alt">
+      <div class="container split">
+        <div>
+          <h2>Packages that make it easy to choose.</h2>
+          <p>
+            Local businesses don’t need a 40-page proposal. They need clarity, speed, and a site that looks legit.
+          </p>
+          <a class="btn btn-ghost" href="services.html">See packages</a>
+        </div>
 
-            <li>
-              <div class="linkRow">
-                <a class="link" href="https://www.roblox.com/users/120940577/profile" target="_blank" rel="noreferrer">
-                  <span>Roblox</span><span class="tag">play</span>
-                </a>
-                <button class="copyBtn" data-copy="120940577">Copy ID</button>
-              </div>
-            </li>
+        <div class="card">
+          <h3 class="card-title">Quick start checklist</h3>
+          <ul class="list">
+            <li>Logo + colors (or I’ll refine them)</li>
+            <li>Photos (phone photos are okay to start)</li>
+            <li>Services list + service area</li>
+            <li>Contact info + preferred leads</li>
           </ul>
+          <p class="muted small">Don’t have all of this? No problem — we’ll fill gaps together.</p>
         </div>
+      </div>
+    </section>
 
-        <!-- PROJECTS -->
-        <div class="panel" role="tabpanel" id="panel-projects" aria-labelledby="tab-projects">
-          <div class="grid">
-            <div class="miniCard">
-              <p class="miniTitle">Active</p>
-              <p class="miniText">
-                <b>Yunari &amp; The Stars</b> — A story written through my fursona: intimate, cosmic, and deeply personal.<br/>
-                <b>Helifax Studios</b> — The connective space where my ideas, projects, and identities intersect.<br/>
-                <b>Christmas Prep</b> — Thoughtful gifting, planning gatherings, and making the season feel warm.<br/>
-                <b>Voice Training</b> — Learning to sing properly, sustainably, and with intention.
-              </p>
-            </div>
-
-            <div class="miniCard">
-              <p class="miniTitle">Slow-burn / on-hold</p>
-              <p class="miniText">
-                <b>Yunari VR Avatar</b> — A long-term VRChat avatar project bringing Yunari to life.<br/>
-                <b>Aviation Training</b> — Working toward becoming a commercial pilot, one step at a time.
-              </p>
-            </div>
-          </div>
-
-          <div class="miniCard" style="margin-top:12px">
-            <p class="miniTitle">Fresh</p>
-            <p class="miniText">
-              <b>Rollerblade Dance</b> — Developing an original rollerblade dance for an upcoming competition.
-            </p>
-          </div>
+    <section class="section">
+      <div class="container cta">
+        <div class="cta-inner">
+          <h2>Ready to make your online presence match your quality?</h2>
+          <p>Tell me what you do, what you need, and your ideal launch date.</p>
+          <a class="btn" href="contact.html">Start a Project</a>
         </div>
+      </div>
+    </section>
+  </main>
 
-        <!-- GALLERY (auto-load, no titles) -->
-        <div class="panel" role="tabpanel" id="panel-gallery" aria-labelledby="tab-gallery">
-          <div class="miniCard">
-            <p class="miniTitle">Gallery</p>
-            <p class="miniText">Click any image to open it big.</p>
-          </div>
-
-          <div class="galleryGrid" id="galleryGrid"></div>
-        </div>
-
-        <!-- WRITING -->
-        <div class="panel" role="tabpanel" id="panel-writing" aria-labelledby="tab-writing">
-          <div class="miniCard">
-            <p class="miniTitle">Featured Work</p>
-            <p class="miniText">
-              <b>Yunari &amp; The Stars</b><br/>
-              A soft-cosmic fantasy following Yunari’s search for truth, family, and the meaning behind fading starlight.
-            </p>
-          </div>
-
-          <div class="miniCard" style="margin-top:12px">
-            <p class="miniTitle">Selected Lore (no spoilers)</p>
-            <p class="miniText">
-              <b>Yunari</b> — a fox-spirit caught between forms, memory, and purpose<br/>
-              <b>The Stars</b> — once constant, now quietly disappearing<br/>
-              <b>The Starfall Accord</b> — an ancient promise that shaped the heavens<br/>
-              <b>Forgotten Libraries &amp; Lost Songs</b> — places and melodies that remember what the world tried to forget
-            </p>
-          </div>
-
-          <div class="grid">
-            <div class="miniCard" style="margin-top:12px">
-              <p class="miniTitle">Tone</p>
-              <p class="miniText">Introspective, emotional, and quietly mythic.</p>
-            </div>
-            <div class="miniCard" style="margin-top:12px">
-              <p class="miniTitle">Reader invitation</p>
-              <p class="miniText">Follow quietly, or reach out if something resonates.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- AVIATION -->
-        <div class="panel" role="tabpanel" id="panel-aviation" aria-labelledby="tab-aviation">
-          <div class="grid">
-            <div class="miniCard">
-              <p class="miniTitle">Current stage</p>
-              <p class="miniText">Studying ground material and building a strong foundation.</p>
-            </div>
-            <div class="miniCard">
-              <p class="miniTitle">Why flying (quietly present)</p>
-              <p class="miniText">
-                Soaring through the clouds at 500+ miles per hour in a massive metal machine is something thousands of people do every day.
-                I’ve never understood how you <i>wouldn’t</i> want to be the one flying it.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- NOW -->
-        <div class="panel" role="tabpanel" id="panel-now" aria-labelledby="tab-now">
-          <div class="grid">
-            <div class="miniCard">
-              <p class="miniTitle">Currently focused</p>
-              <p class="miniText">Navigating a job transition, writing, holiday preparation, and voice training.</p>
-            </div>
-            <div class="miniCard">
-              <p class="miniTitle">Energy</p>
-              <p class="miniText">Excited — in a focused, forward-moving way.</p>
-            </div>
-          </div>
-
-          <div class="miniCard" style="margin-top:12px">
-            <p class="miniTitle">Open to</p>
-            <p class="miniText">Conversations, collaboration, feedback, and new momentum.</p>
-          </div>
-        </div>
-
-        <!-- CONTACT -->
-        <div class="panel" role="tabpanel" id="panel-contact" aria-labelledby="tab-contact">
-          <div class="grid">
-            <div class="miniCard">
-              <p class="miniTitle">Contact</p>
-              <p class="miniText">
-                <b>Discord is the only place I respond to messages.</b><br/>
-                Other platforms are for viewing if you’re curious.<br/><br/>
-                If you reach out on Discord, please include who you are and why you’re messaging —
-                it helps me tell genuine connections apart from spam.
-              </p>
-            </div>
-            <div class="miniCard">
-              <p class="miniTitle">Open to</p>
-              <p class="miniText">Creative collaboration and thoughtful feedback, always.</p>
-              <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px">
-                <button class="copyBtn" data-copy="https://discord.com/users/605927149282656257">Copy Discord</button>
-                <button class="copyBtn" data-copy="usr_d997cab5-4046-4eb5-8ac7-fbb34163f5aa">Copy VRChat</button>
-                <button class="copyBtn" data-copy="120940577">Copy Roblox</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </section>
-
-      <!-- FOOTER -->
-      <footer class="footer">
-        <span>© <span id="y"></span> Helifax Studio</span>
-        <span>soft-coded creator hub ✿</span>
-      </footer>
-
-    </main>
-    <!-- BLOG (below the main card) -->
-<section class="lower">
-  <div class="card">
-    <div class="blogHeader">
+  <footer class="footer">
+    <div class="container footer-row">
       <div>
-        <h2 class="blogTitle">Blog ✿</h2>
-        <p class="blogSub">Tiny updates, progress logs, and cozy thoughts.</p>
+        <p class="footer-brand">Cyro Helifax <span class="muted">— Helifax Studios</span></p>
+        <p class="muted small">Based local, available remote. Clean sites that feel established.</p>
       </div>
-      <div class="badge" title="Local posts stored in index.html">
-        <span class="dot"></span> Updates <small>live</small>
-      </div>
-    </div>
-
-    <div class="panelWrap" style="border-top:none;">
-      <div style="padding: 0 18px 18px;">
-        <div class="blogGrid" id="blogGrid"></div>
+      <div class="footer-links">
+        <a href="services.html">Services</a>
+        <a href="work.html">Work</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
       </div>
     </div>
-  </div>
-</section>
+  </footer>
 
-    <!-- Blog modal -->
-<div class="modal" id="blogModal" aria-hidden="true">
-  <div class="modalCard" role="dialog" aria-modal="true" aria-label="Blog post">
-    <div class="modalTop">
-      <button class="modalClose" id="blogClose" aria-label="Close">Close</button>
-    </div>
-    <div class="blogModalBody">
-      <h3 class="blogModalTitle" id="blogTitle"></h3>
-      <p class="blogModalMeta" id="blogMeta"></p>
-      <p class="blogModalText" id="blogBody"></p>
-    </div>
-  </div>
-</div>
-
-  </div>
-
-  <!-- Lightbox modal -->
-  <div class="modal" id="modal" aria-hidden="true">
-    <div class="modalCard" role="dialog" aria-modal="true" aria-label="Image preview">
-      <div class="modalTop">
-        <button class="modalClose" id="modalClose" aria-label="Close">Close</button>
-      </div>
-      <img class="modalImg" id="modalImg" src="" alt="Expanded view">
-    </div>
-  </div>
-
-  <div class="toast" id="toast">Copied ✨</div>
-
-  <script>
-    // Year
-    document.getElementById('y').textContent = new Date().getFullYear();
-
-    // Tabs
-    const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
-    const panels = Array.from(document.querySelectorAll('[role="tabpanel"]'));
-
-    function activateTab(tab){
-      tabs.forEach(t => t.setAttribute('aria-selected', String(t === tab)));
-      panels.forEach(p => p.classList.toggle('active', p.id === tab.getAttribute('aria-controls')));
-      tab.focus();
-    }
-
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => activateTab(tab));
-      tab.addEventListener('keydown', (e) => {
-        const i = tabs.indexOf(tab);
-        if (e.key === 'ArrowRight') activateTab(tabs[(i + 1) % tabs.length]);
-        if (e.key === 'ArrowLeft') activateTab(tabs[(i - 1 + tabs.length) % tabs.length]);
-      });
-    });
-
-    // Toast
-    const toast = document.getElementById('toast');
-    let toastTimer = null;
-    function showToast(text){
-      toast.textContent = text;
-      toast.classList.add('show');
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => toast.classList.remove('show'), 1100);
-    }
-
-    // Copy buttons
-    async function copyText(text){
-      try{
-        await navigator.clipboard.writeText(text);
-        showToast('Copied ✨');
-      }catch(err){
-        const ta = document.createElement('textarea');
-        ta.value = text;
-        ta.setAttribute('readonly','');
-        ta.style.position = 'fixed';
-        ta.style.opacity = '0';
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand('copy');
-        document.body.removeChild(ta);
-        showToast('Copied ✨');
-      }
-    }
-
-    document.querySelectorAll('.copyBtn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const val = btn.getAttribute('data-copy') || '';
-        copyText(val);
-      });
-    });
-
-    // Lightbox
-    const modal = document.getElementById('modal');
-    const modalImg = document.getElementById('modalImg');
-    const modalClose = document.getElementById('modalClose');
-
-    function openModal(src){
-      modalImg.src = src;
-      modal.classList.add('show');
-      modal.setAttribute('aria-hidden', 'false');
-    }
-    function closeModal(){
-      modal.classList.remove('show');
-      modal.setAttribute('aria-hidden', 'true');
-      modalImg.src = '';
-    }
-
-    modalClose.addEventListener('click', closeModal);
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) closeModal();
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal.classList.contains('show')) closeModal();
-    });
-
-    // Gallery auto-load: /gallery/gallery1..gallery12, tries png/jpg/jpeg/webp
-    const galleryGrid = document.getElementById('galleryGrid');
-    const exts = ['png','jpg','jpeg','webp'];
-    const nums = Array.from({length:12}, (_,i)=>i+1);
-
-    function tryLoad(url){
-      return new Promise(resolve => {
-        const img = new Image();
-        img.onload = () => resolve(url);
-        img.onerror = () => resolve(null);
-        img.src = url;
-      });
-    }
-
-    async function resolvePath(n){
-      for (const ext of exts){
-        const url = `gallery/gallery${n}.${ext}`;
-        const ok = await tryLoad(url);
-        if (ok) return ok;
-      }
-      return null;
-    }
-
-    (async function buildGallery(){
-      if (!galleryGrid) return;
-      galleryGrid.innerHTML = '';
-
-      for (const n of nums){
-        const src = await resolvePath(n);
-        if (!src) continue;
-
-        const t = document.createElement('div');
-        t.className = 'thumb';
-
-        const img = document.createElement('img');
-        img.src = src;
-        img.alt = '';
-
-        t.appendChild(img);
-        t.addEventListener('click', () => openModal(src));
-        galleryGrid.appendChild(t);
-      }
-    })();
-
-
-// ===== BLOG: load from /posts/posts.json =====
-function formatDate(iso){
-  try{
-    const d = new Date(iso + "T00:00:00");
-    return d.toLocaleDateString(undefined, { year:"numeric", month:"short", day:"numeric" });
-  }catch{
-    return iso || "";
-  }
-}
-
-function escapeHtml(s=""){
-  return String(s)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-}
-
-// Very small Markdown renderer (safe: escapes HTML first)
-// Supports: # ## ###, **bold**, *italic*, [text](url), - bullets, line breaks
-function mdToHtml(md=""){
-  let s = escapeHtml(md);
-
-  // headings
-  s = s.replace(/^### (.*)$/gm, "<h4>$1</h4>");
-  s = s.replace(/^## (.*)$/gm, "<h3>$1</h3>");
-  s = s.replace(/^# (.*)$/gm, "<h2>$1</h2>");
-
-  // bold + italics
-  s = s.replace(/\*\*(.+?)\*\*/g, "<b>$1</b>");
-  s = s.replace(/\*(.+?)\*/g, "<i>$1</i>");
-
-  // links
-  s = s.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, `<a href="$2" target="_blank" rel="noreferrer">$1</a>`);
-
-  // bullets: wrap contiguous "- " blocks into <ul>
-  s = s.replace(/(?:^|\n)(- .*(?:\n- .*)*)/g, (match) => {
-    const lines = match.trim().split("\n").filter(Boolean);
-    const lis = lines
-      .map(l => l.replace(/^- /, "").trim())
-      .map(t => `<li>${t}</li>`)
-      .join("");
-    return `\n<ul>${lis}</ul>`;
-  });
-
-  // line breaks (after lists/heads/bold/italics)
-  s = s.replace(/\n/g, "<br>");
-
-  return s;
-}
-
-// For card excerpts (strip most formatting)
-function mdToText(md=""){
-  return String(md)
-    .replace(/^#{1,3}\s+/gm,"")
-    .replace(/\*\*(.+?)\*\*/g,"$1")
-    .replace(/\*(.+?)\*/g,"$1")
-    .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,"$1")
-    .replace(/<\/?[^>]+(>|$)/g,"")
-    .trim();
-}
-
-// --- Modal hooks ---
-const blogGrid  = document.getElementById("blogGrid");
-const blogModal = document.getElementById("blogModal");
-const blogClose = document.getElementById("blogClose");
-const blogTitle = document.getElementById("blogTitle");
-const blogMeta  = document.getElementById("blogMeta");
-const blogBody  = document.getElementById("blogBody");
-
-function openBlog(post){
-  if (!blogModal) return;
-  blogTitle.textContent = post.title || "Untitled";
-  blogMeta.textContent  = `${formatDate(post.date)}${(post.tags && post.tags.length) ? " • " + post.tags.join(" • ") : ""}`;
-  blogBody.innerHTML    = mdToHtml(post.body || "");
-  blogModal.classList.add("show");
-  blogModal.setAttribute("aria-hidden","false");
-}
-
-function closeBlog(){
-  if (!blogModal) return;
-  blogModal.classList.remove("show");
-  blogModal.setAttribute("aria-hidden","true");
-  blogBody.innerHTML = "";
-}
-
-if (blogClose) blogClose.addEventListener("click", closeBlog);
-if (blogModal) blogModal.addEventListener("click", (e) => { if (e.target === blogModal) closeBlog(); });
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && blogModal && blogModal.classList.contains("show")) closeBlog();
-});
-
-// --- Load posts from posts/posts.json ---
-async function loadPosts(){
-  try{
-    const res = await fetch("posts/posts.json", { cache: "no-store" });
-    if (!res.ok) throw new Error("Failed to load posts/posts.json");
-    const posts = await res.json();
-    return Array.isArray(posts) ? posts : [];
-  }catch(err){
-    console.warn(err);
-    return [];
-  }
-}
-
-// --- Render blog cards ---
-async function renderBlog(){
-  if (!blogGrid) return;
-
-  const posts = (await loadPosts())
-    .slice()
-    .sort((a,b) => (String(a.date) < String(b.date) ? 1 : -1));
-
-  blogGrid.innerHTML = "";
-
-  posts.forEach(post => {
-    const card = document.createElement("div");
-    card.className = "postCard";
-
-    const firstLine = String(post.body || "").split("\n").filter(Boolean)[0] || "";
-    const cleaned = mdToText(firstLine);
-    const excerpt = cleaned.slice(0, 110) + (cleaned.length > 110 ? "…" : "");
-
-    const tagsHtml = (post.tags || []).map(t => `<span class="tagPill">${escapeHtml(t)}</span>`).join("");
-
-    card.innerHTML = `
-      <div class="postMeta">
-        <span>${escapeHtml(formatDate(post.date))}</span>
-        <span>✿</span>
-      </div>
-      <h4 class="postTitle">${escapeHtml(post.title || "Untitled")}</h4>
-      <p class="postExcerpt">${escapeHtml(excerpt)}</p>
-      <div class="tagRow">${tagsHtml}</div>
-    `;
-
-    card.addEventListener("click", () => openBlog(post));
-    blogGrid.appendChild(card);
-  });
-}
-
-// Call once on load
-renderBlog();
-
-  </script>
+  <script src="js/main.js"></script>
 </body>
 </html>
