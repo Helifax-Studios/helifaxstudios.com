@@ -17,7 +17,7 @@
 }
 
 *{ box-sizing:border-box; }
-html, body { height:100%; }
+html, body { min-height:100%; }
 body{
   margin:0;
   color: var(--text);
@@ -445,3 +445,4 @@ textarea{ resize: vertical; min-height: 120px; }
   .nav.open{ display:flex; }
   .nav a{ padding: 12px 12px; }
 }
+
